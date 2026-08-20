@@ -5,3 +5,8 @@ results/raw/
 *.npy
 *.npz
 .ipynb_checkpoints/
+
+# Run logs: regenerable, noisy, and they capture presigned HuggingFace CDN URLs
+# (signed query parameters and account ids) from download retry warnings.
+results/*.log
+results/*.bak*
