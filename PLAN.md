@@ -129,8 +129,15 @@ best layer (selected on a held-out *split of the stimuli*, not on the outcome).
 grams at **EQ = 0.7715** on this exact task with no neural network (results/PHASE0.md).
 Reporting EQ against chance overstates every model by ~0.27 and put two of five pilot
 models at or below a bag-of-characters. Every EQ number must be reported as a margin over
-that baseline, and the baseline recomputed for any new stimulus set. Stronger still:
-partial the TF-IDF cosine out of the model cosine and take AUROC on the residual.
+that baseline, and the baseline recomputed for any new stimulus set.
+
+**Phase 0.5 resolution: the primary IV for the full panel is `EQ_resid`** — AUROC after
+partialling the TF-IDF cosine out of the model cosine (src/lexical.py), at last-token
+pooling, k=1, layer chosen on a stimulus split. Its null is 0.5 by construction, it keeps
+all anchors, and it had the strongest capability tracking (rho +0.82 with in-house GSM8K)
+and best cross-correction ordering stability on the 10-model dissociated panel. `eq_hard`
+(negatives lexically >= the true partner; TF-IDF scores 0.0 there) is the audit metric;
+raw EQ with the TF-IDF margin is reported for continuity. See results/PHASE05.md sec 4.
 
 - Scale-free, threshold-free, no calibration needed, bounded — good properties for a small-N
   rank correlation.
@@ -244,6 +251,7 @@ Write this section before running anything. It is the difference between a study
 | Phase | Work | Gate |
 |---|---|---|
 | 0. Pilot (~1 wk) | 3 models (1 small base, 1 large base, 1 math-tuned), MELD only, `EQ` + `INV` | Does `EQ` separate the 3 models at all, in the expected order? If not, stop and fix the metric. |
+| 0.5 **done** | 10-model size/capability-dissociated panel; lexically-controlled metric variants; in-house GSM8K | Metric selected (`EQ_resid`); size hypothesis rejected; pre-registered SmolLM2-1.7B point resolved for capability (results/PHASE05.md) |
 | 1. Stimuli (~2 wk) | Build/validate hard negatives, formal↔informal set, templated set; annotator agreement | Negative set validated, equivalence certified |
 | 2. Pre-registration | Freeze §6 primary test, §8 falsification, model panel | Committed to file, hashed |
 | 3. Sweep (~3 wk) | Full N=25–30 × all stimuli × all layers; all DVs run in-house | Complete matrix, bootstrap CIs |

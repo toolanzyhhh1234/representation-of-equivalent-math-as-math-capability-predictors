@@ -32,3 +32,31 @@ CORRECTIONS = ["k0", "k1", "k3", "gapk", "zca"]
 # (b): first base / math-tuned pair at identical size -- the earliest point where
 # parameter count and math training come apart.
 PAIR_MODELS = ["Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-Math-1.5B"]
+
+# Phase 0.5 panel: the pre-registered dissociation test (results/PHASE0.md sec 7).
+# SmolLM2-1.7B has Qwen2.5-0.5B's maths and Qwen2.5-1.5B's size; TinyLlama-1.1B and
+# Falcon3-1B add size~1B points whose capability differs; Qwen2/Qwen2-Math-1.5B is a
+# second base/math pair at identical parameter count. Llama-3.2-1B is gated (no token
+# on this machine) and dropped. params = total parameters, from each model's card.
+PANEL = [
+    # model_id,                      params(B)
+    ("HuggingFaceTB/SmolLM2-360M",   0.36),
+    ("Qwen/Qwen2.5-0.5B",            0.49),
+    ("Qwen/Qwen3-0.6B",              0.60),
+    ("TinyLlama/TinyLlama_v1.1",     1.10),
+    ("tiiuae/Falcon3-1B-Base",       1.67),
+    ("HuggingFaceTB/SmolLM2-1.7B",   1.71),
+    ("Qwen/Qwen2-1.5B",              1.54),
+    ("Qwen/Qwen2-Math-1.5B",         1.54),
+    ("Qwen/Qwen2.5-1.5B",            1.54),
+    ("Qwen/Qwen2.5-Math-1.5B",       1.54),
+]
+
+# Published same-harness GSM8K (SmolLM2 paper / model cards, 5-shot) -- used only as a
+# cross-check; the capability axis for any claim is measured in-house (src/eval_gsm8k.py).
+GSM8K_PUBLISHED = {
+    "HuggingFaceTB/SmolLM2-360M": 3.2,
+    "Qwen/Qwen2.5-0.5B": 33.4,
+    "Qwen/Qwen2.5-1.5B": 61.7,
+    "HuggingFaceTB/SmolLM2-1.7B": 31.1,
+}

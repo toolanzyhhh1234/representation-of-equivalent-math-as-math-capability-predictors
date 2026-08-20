@@ -1,7 +1,17 @@
 # Metrics: what we measure, why it is valid, and how to read a result
 
-Companion to `PLAN.md` (design) and `results/PHASE0.md` (the Phase 0 findings).
-Implementation: `src/metrics.py`, `src/correct.py`.
+Companion to `PLAN.md` (design), `results/PHASE0.md` (Phase 0 findings), and
+`results/PHASE05.md` (the lexically-controlled variants and the metric-selection
+verdict). Implementation: `src/metrics.py`, `src/correct.py`, `src/lexical.py`.
+
+**Status note (Phase 0.5).** The defect this document diagnoses in sections 5.1-5.2 —
+EQ's null was wrong and its negatives leak topical lexical signal — has been addressed
+statistically: `src/lexical.py` implements `EQ_resid` (AUROC after partialling the
+TF-IDF cosine out of the model cosine; null = 0.5 by construction), `EQ_hard` (AUROC
+against only negatives at least as lexically close as the true partner; TF-IDF scores
+0.0 on it by construction), and `EQ_lextop`. On a 10-model size/capability-dissociated
+panel, `EQ_resid` was selected as the primary metric to scale (see PHASE05.md sec 4
+for the selection table). Everything below remains the correct account of raw EQ.
 
 ---
 
@@ -103,6 +113,11 @@ identical task with no neural network:
 
 A model scoring 0.77 has demonstrated nothing. **Always report EQ as a margin over the lexical
 baseline, recomputed for the stimulus set in use.**
+
+Reproducibility pin (Phase 0.5): the 0.7715 baseline is sklearn
+`TfidfVectorizer(analyzer="char_wb", ngram_range=(3,5))`, defaults otherwise —
+plain `char` gives 0.7608. The vectorizer lives in `src/lexical.py::lexical_cos`;
+`lowercase=False` reaches 0.7770 and is the sensitivity null.
 
 ### 5.2 Construct validity: the negatives control framing but not topic
 
@@ -212,14 +227,21 @@ For the result above:
 
 ## 7. Summary
 
-The metric is a well-constructed **discrimination statistic**: scale-free, controlled for
+Raw EQ is a well-constructed **discrimination statistic**: scale-free, controlled for
 subfield, honestly split for layer selection, and guarded by verified numerical checks. It is
-not yet a valid **measure of equivalence representation**, because its null was wrong (5.1) and
-its negatives leak topical lexical signal (5.2).
+not by itself a valid **measure of equivalence representation**, because its null was wrong
+(5.1) and its negatives leak topical lexical signal (5.2).
 
-Converting it into one requires either topic-matched negatives, or partialling the TF-IDF cosine
-out of the model cosine and scoring AUROC on the residual. Both are re-analysis of activations
-already cached on disk — no GPU time, no download.
+Phase 0.5 executed the fix this section originally called for: `EQ_resid` partials the TF-IDF
+cosine out of the model cosine and scores AUROC on the residual, and `EQ_hard` restricts to
+negatives the lexical channel cannot rank. Both were validated on a size/capability-dissociated
+panel and `EQ_resid` is the pre-registered primary for the full panel (PHASE05.md sec 4).
+The remaining validity gap is by-construction rather than statistical control: topic-matched
+negatives, and a frozen sentence encoder as a stronger partialled regressor. Sub-baseline raw
+EQ still needs care in interpretation: PHASE05.md sec 3 shows a model can sit below the
+*lexical* baseline while carrying real non-lexical signal (SmolLM2-360M: margin -0.035,
+EQ_resid 0.683), so "at the lexical floor" and "no equivalence signal" are different claims —
+the step-2 margin readout in section 6 tells you the first, only EQ_resid tells you the second.
 
 **Caveat on partialling, which must accompany any reported residual EQ.**
 Mathematically equivalent statements *legitimately* share vocabulary, so TF-IDF similarity and
@@ -228,8 +250,14 @@ therefore removes real signal along with the artifact, making the test **biased 
 negatives**: a near-zero residual EQ is a **lower bound**, not proof that no non-lexical signal
 exists. Sahoo et al. ([2606.02907](https://arxiv.org/abs/2606.02907) sec 7) flag the same hazard
 for their own residualization — Ridge on a near-perfect proxy "can explain nearly all variance,
-potentially removing genuine signal alongside format information."
+potentially removing genuine signal alongside format information." Phase 0.5 observed the bias
+directly: `eq_resid` at layer 0 sits *below* its 0.5 null (0.23-0.39), the signature of
+over-correction where the representation is mostly lexical. It fails on the safe side — no
+positive lexical signal can leak through — but low residuals understate, never overstate.
 
 Topic-matched negatives are the complementary fix: they repair the **stimulus** rather than
-subtracting from the **measurement**, so they do not carry this bias. Run both; if they
-disagree, trust the topic-matched construction.
+subtracting from the **measurement**, so they do not carry this bias. `EQ_hard` is the cheap
+within-MELD approximation of that repair (restrict to negatives the lexical channel ranks above
+the true partner) and is the Phase 0.5 audit metric; purpose-built topic-matched negatives
+remain the stronger version. Run both partialled and restricted forms; if they disagree, trust
+the restriction.

@@ -1,0 +1,62 @@
+{
+ "HuggingFaceTB/SmolLM2-360M": {
+  "acc": 0.04624715693707354,
+  "n": 1319,
+  "correct": 61,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2.5-0.5B": {
+  "acc": 0.3510235026535254,
+  "n": 1319,
+  "correct": 463,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen3-0.6B": {
+  "acc": 0.40106141015921154,
+  "n": 1319,
+  "correct": 529,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "TinyLlama/TinyLlama_v1.1": {
+  "acc": 0.024260803639120546,
+  "n": 1319,
+  "correct": 32,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "tiiuae/Falcon3-1B-Base": {
+  "acc": 0.3062926459438969,
+  "n": 1319,
+  "correct": 404,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "HuggingFaceTB/SmolLM2-1.7B": {
+  "acc": 0.2964366944655042,
+  "n": 1319,
+  "correct": 391,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2-1.5B": {
+  "acc": 0.5830174374526156,
+  "n": 1319,
+  "correct": 769,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2-Math-1.5B": {
+  "acc": 0.6315390447308568,
+  "n": 1319,
+  "correct": 833,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2.5-1.5B": {
+  "acc": 0.5959059893858984,
+  "n": 1319,
+  "correct": 786,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2.5-Math-1.5B": {
+  "acc": 0.7278241091736164,
+  "n": 1319,
+  "correct": 960,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ }
+}

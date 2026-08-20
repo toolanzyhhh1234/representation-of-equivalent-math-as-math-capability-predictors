@@ -1,5 +1,10 @@
 # Phase 0 gate — result
 
+> **Update (Phase 0.5, 2026-08-20):** the section-7 prediction resolved — SmolLM2-1.7B
+> observed EQ 0.748 held-out / 0.769 full-set, CI excluding the size prediction (0.808):
+> **capability, not size**. The linear calibration and its GSM8K ~ 32.5 zero-crossing did
+> *not* survive a 10-point in-house test. See `results/PHASE05.md`.
+
 5 models x MELD (270 pairs, 541 framing-matched hard negatives, 1080 statements),
 5 anisotropy corrections x 2 poolings x every layer.
 
