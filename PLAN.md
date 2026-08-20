@@ -124,6 +124,13 @@ If the headline result survives only at k=0, it is an anisotropy artifact. Say s
 Primary: **AUROC** of separating positive pairs from hard negatives using cosine similarity, at the
 best layer (selected on a held-out *split of the stimuli*, not on the outcome).
 
+**The null is a lexical baseline, not 0.5.** Phase 0 measured TF-IDF over character 3-5
+grams at **EQ = 0.7715** on this exact task with no neural network (results/PHASE0.md).
+Reporting EQ against chance overstates every model by ~0.27 and put two of five pilot
+models at or below a bag-of-characters. Every EQ number must be reported as a margin over
+that baseline, and the baseline recomputed for any new stimulus set. Stronger still:
+partial the TF-IDF cosine out of the model cosine and take AUROC on the residual.
+
 - Scale-free, threshold-free, no calibration needed, bounded — good properties for a small-N
   rank correlation.
 - Secondary: alignment gap `mean cos(equiv) − mean cos(hard-neg)`; RSA between the model's
@@ -302,6 +309,15 @@ notebooks/     exploratory only, never the source of a reported number
 | 4B+ | 8 GB+ | does not fit |
 
 ### 12.3 Cost per stage
+
+**Measured, Phase 0: the bottleneck is network, not GPU.** A 5-model run took ~60 min
+wall clock, of which ~55 min was HuggingFace download at ~2 MB/s (xet client throwing
+`IncompleteMessage` retries). Metrics were 13-45 s/model and extraction 2-15 s/model.
+For a 25-30 model panel at ~2 GB each that is **7-9 hours of pure downloading** --
+larger than every other cost combined. Therefore: pre-fetch the whole panel in a
+separate overnight loop so the science run never blocks on the network, and A/B
+`HF_HUB_DISABLE_XET=1` on one model first (2 MB/s looks like protocol trouble, not a
+link ceiling). Cached re-runs of the same panel are ~5 min, so metric iteration is free.
 
 - **IV / extraction (cheap).** Forward passes only. ~1500 statements × ~30 layers per model;
   seconds to low minutes each, **well under an hour for the whole panel**.
