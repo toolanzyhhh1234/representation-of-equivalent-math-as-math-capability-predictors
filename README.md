@@ -8,6 +8,7 @@ equivalent reformulations?
 
 | document | contents |
 |---|---|
+| [`REPORT.md`](REPORT.md) | **preliminary technical report** — the self-contained write-up of everything below |
 | [`PLAN.md`](PLAN.md) | full design: hypotheses, panel, statistics, falsification criteria, compute budget |
 | [`METRICS.md`](METRICS.md) | what EQ is, why the statistic is valid, where its validity breaks, and how to read a result |
 | [`results/PHASE0.md`](results/PHASE0.md) | Phase 0: the lexical-null finding and the dissociation predictions |

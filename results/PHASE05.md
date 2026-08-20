@@ -127,8 +127,14 @@ Caveats attached to the decision: `eq_resid`'s layer-0 value sits *below* its nu
 (0.23-0.39) — the partialling over-corrects where the representation is purely lexical.
 That is the acceptable side to fail on (no positive lexical signal can leak through),
 but it means eq_resid at layer 0 is not a flat 0.5, and the layer-selection split must
-stay. `eq_hard`'s instability (family jackknife 0.52-0.80) comes from its restricted
-negative pools, and it leans hardest on the TinyLlama anchor point.
+stay. More generally (METRICS.md sec 7): equivalent statements *legitimately* share
+vocabulary, so partialling TF-IDF out removes real signal along with the artifact —
+**eq_resid is a lower bound**, biased toward false negatives, per the hazard Sahoo et
+al. (2606.02907 sec 7) flag for their own residualization. That is precisely why
+`eq_hard` ships alongside as the audit: it repairs the comparison set rather than
+subtracting from the measurement, so it does not carry the bias — at the price of 71%
+coverage and noisier pools (family jackknife 0.52-0.80, leaning hardest on the
+TinyLlama anchor point). When the two disagree, trust the restriction.
 
 ## 5. What did NOT survive Phase 0: the linear calibration
 
