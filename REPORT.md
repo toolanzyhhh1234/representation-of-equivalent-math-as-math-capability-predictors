@@ -1,11 +1,12 @@
 # Representation of Equivalent Mathematics Predicts Math Capability, Not Model Size
 
-**⚠️ PRELIMINARY TECHNICAL REPORT — v0.1, 2026-08-20.**
+**⚠️ PRELIMINARY TECHNICAL REPORT — v0.2, 2026-08-20.**
 *This is an early-stage result on a 10-model panel, shared to establish priority and
 invite critique. The limitations in §7 are load-bearing: the headline correlation is
-robust within this panel, but the panel is small, family-imbalanced, and the
-specificity control (§7.1) has not yet been run. Do not cite the quantitative claims
-as settled.*
+robust within this panel, but the panel is small and family-imbalanced. v0.2 adds the
+specificity control (§4.7): the "general representation quality" alternative
+explanation is now tested and disfavoured. Do not cite the quantitative claims as
+settled.*
 
 **Author:** Ian ([@toolanzyhhh1234](https://github.com/toolanzyhhh1234))
 **Repository:** all code, data pointers, per-model results, and the analysis pipeline
@@ -36,7 +37,12 @@ with mid math ability) was predicted at EQ 0.770 under the capability hypothesis
 0.808 under the size hypothesis; observed 0.748 (95% CI [0.742, 0.796], excluding the
 size prediction). Both base→math-tuned pairs at identical parameter count
 (Qwen2.5-1.5B and Qwen2-1.5B families) shift positively on every metric variant, and
-the effect grows rather than shrinks under lexical control.
+the effect grows rather than shrinks under lexical control. A specificity control
+(v0.2) disfavours the deflationary "better models embed everything better" account:
+the identical metric pipeline run on adversarial *paraphrase* data (PAWS) is
+uncorrelated with `EQ_resid` across models and predicts neither capability axis,
+while `EQ_resid` predicts GSM8K but not ARC-Easy — only the math-metric × math-DV
+cell of the 2×2 carries signal.
 
 ---
 
@@ -217,7 +223,40 @@ non-Qwen models (dropping Qwen raises the remaining 4-point ρ to 1.0) — eithe
 family-specific representation style enters EQ, or GSM8K mismeasures the ability EQ
 reflects across families. The full panel must resolve this.
 
-### 4.6 Metric selection
+### 4.6 Specificity: is this a math metric or a "well-trained model" meter?
+
+The obvious deflationary reading of §4.1 is that better-trained models embed *all*
+text better and also do more math, making EQ a general-quality meter read on math
+stimuli. A clean separation of "well-trained generally" from "well-trained in math" is
+impossible across models — training mixes are correlated — so we test contrasts
+instead, with a language-side mirror of each element: **PARA_resid**, the identical
+metric pipeline run on PAWS (paraphrase pairs vs deliberately high-lexical-overlap
+non-paraphrases — the same equivalent-vs-lookalike discrimination in general language;
+TF-IDF null 0.475, adversarial by design), and **ARC-Easy** in-house as the non-math
+capability axis (which decorrelates from GSM8K on this panel: ρ = +0.10).
+
+![Specificity 2x2](results/specificity.png)
+
+| | GSM8K (math DV) | ARC-Easy (language DV) |
+|---|---|---|
+| **EQ_resid** (math metric) | **+0.818** (p = 0.005) | +0.164 (n.s.) |
+| **PARA_resid** (language metric) | −0.515 (n.s.) | −0.515 (n.s.) |
+
+Three independent contrasts disfavour the general-quality account: (i) the metric
+contrast ρ(EQ_resid, GSM8K) − ρ(PARA_resid, GSM8K) = +1.33, model-bootstrap 95% CI
+[+0.33, +1.87]; (ii) EQ_resid and PARA_resid are *uncorrelated* across models
+(ρ = −0.30) — two readouts of one underlying quality would covary; (iii) partialling
+PARA_resid out of EQ_resid changes nothing (ρ with GSM8K: +0.81), and EQ_resid knows
+nothing about the non-math DV (ρ with ARC given PARA: +0.01). Model-level: TinyLlama
+is last on every math measure yet *first* on PARA_resid; the math-tuned Qwens gain
+GSM8K and EQ while losing ARC. Caveats: the base→math-tuned deltas moved PARA as well
+as EQ (within measurement noise — the paired version of this test is inconclusive),
+and PAWS discrimination has a narrow cross-model spread (0.59–0.65), so a stronger
+language-side instrument could yet find shared variance this one cannot see — though
+the EQ×ARC null does not depend on PAWS at all. Details:
+`results/PHASE1_SPECIFICITY.md`.
+
+### 4.7 Metric selection
 
 Scored on: a lexically dead null; a layer-0 (token-identity) control near that null;
 ordering stability across five anisotropy corrections; capability tracking; jackknife
@@ -257,13 +296,13 @@ closest (2605.09496) uses five models without a capability regression.
 
 ## 7. Limitations — read before citing
 
-1. **Specificity is untested (the main threat).** "EQ_resid tracks capability" could
-   reduce to "better-trained models embed all text better, and better-trained small
-   models also do more math." The discriminating experiment — the same residual metric
-   on *non-mathematical* paraphrase pairs, which should predict GSM8K substantially
-   worse if the effect is math-specific — has not been run. Until it has, the result
-   supports "EQ_resid is a cheap correlate of capability at 0.4–1.7B," not a
-   mechanistic claim about mathematical representation.
+1. **Specificity: tested (v0.2), general-quality account disfavoured — but not fully
+   closed.** §4.6 shows EQ_resid does not correlate with its language-side mirror,
+   does not predict non-math capability, and survives partialling — three contrasts a
+   general-quality meter would fail. Remaining gaps: the *paired* version (does math
+   tuning specifically move only the math metric?) is inconclusive at current
+   measurement precision, and PAWS may be too weak an instrument to detect shared
+   variance on the metric side. A mechanistic (causal) claim still requires §7.5.
 2. **N = 10, 6 of them Qwen.** The jackknife shows no single family drives the result,
    but the family-at-fixed-capability effect in §4.5 is real and unresolved. The
    non-Qwen minority is 4 points.
@@ -284,19 +323,23 @@ closest (2605.09496) uses five models without a capability regression.
 ```bash
 pip install torch transformers datasets scikit-learn scipy matplotlib
 python -m src.run_panel     # extract + all metric variants (10 models, ~5 min cached)
-python -m src.eval_gsm8k    # in-house capability axis (~30 min on an RTX 5090)
-python -m src.analyze       # every table in this report
-python -m src.figures       # the figure
+python -m src.eval_gsm8k    # in-house math capability axis (~30 min on an RTX 5090)
+python -m src.specificity   # PARA metric on PAWS (the language-side mirror)
+python -m src.eval_arc      # in-house non-math capability axis (~2 min)
+python -m src.analyze       # panel tables (sec 4.1-4.5)
+python -m src.analyze_spec  # specificity tables (sec 4.6)
+python -m src.figures && python -m src.figures_spec   # both figures
 ```
 
 ## Roadmap
 
-In order: (1) the non-math specificity control (§7.1); (2) panel to N = 25–30 with ≥ 3
-additional non-Qwen families; (3) the GSM-Symbolic invariance arm (the actual H2);
-(4) frozen-sentence-encoder partialling and purpose-built topic-matched negatives;
-(5) OLMo-2 training-checkpoint trajectory (does EQ rise before, with, or after
-capability). Falsification criteria for the full study are pre-committed in
-[`PLAN.md`](PLAN.md) §8.
+In order: (1) ~~the non-math specificity control~~ **done, v0.2 (§4.6)**; (2) panel to
+N = 25–30 with ≥ 3 additional non-Qwen families; (3) the GSM-Symbolic invariance arm
+(the actual H2); (4) frozen-sentence-encoder partialling and purpose-built
+topic-matched negatives, plus a stronger language-side mirror than PAWS and
+stimulus-level paired bootstraps to settle the T1 tuning contrast; (5) OLMo-2
+training-checkpoint trajectory (does EQ rise before, with, or after capability).
+Falsification criteria for the full study are pre-committed in [`PLAN.md`](PLAN.md) §8.
 
 ## Acknowledgements
 

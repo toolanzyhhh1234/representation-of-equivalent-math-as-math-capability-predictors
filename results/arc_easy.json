@@ -1,0 +1,52 @@
+{
+ "HuggingFaceTB/SmolLM2-360M": {
+  "acc_norm": 0.6931818181818182,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2.5-0.5B": {
+  "acc_norm": 0.593013468013468,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen3-0.6B": {
+  "acc_norm": 0.5673400673400674,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "TinyLlama/TinyLlama_v1.1": {
+  "acc_norm": 0.43265993265993263,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "tiiuae/Falcon3-1B-Base": {
+  "acc_norm": 0.672979797979798,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "HuggingFaceTB/SmolLM2-1.7B": {
+  "acc_norm": 0.7441077441077442,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2-1.5B": {
+  "acc_norm": 0.6153198653198653,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2-Math-1.5B": {
+  "acc_norm": 0.6763468013468014,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2.5-1.5B": {
+  "acc_norm": 0.7289562289562289,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2.5-Math-1.5B": {
+  "acc_norm": 0.648989898989899,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ }
+}

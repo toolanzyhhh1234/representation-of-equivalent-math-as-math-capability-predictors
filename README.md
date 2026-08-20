@@ -4,7 +4,7 @@ Does the geometry of an LLM's internal representation of **mathematically equiva
 statements** predict its mathematical capability — and, more sharply, its robustness to
 equivalent reformulations?
 
-## Status: Phase 0.5 complete. Metric selected; size hypothesis rejected.
+## Status: Phase 1 (specificity) complete. The metric is math-specific, not a general-quality meter.
 
 | document | contents |
 |---|---|
@@ -13,6 +13,7 @@ equivalent reformulations?
 | [`METRICS.md`](METRICS.md) | what EQ is, why the statistic is valid, where its validity breaks, and how to read a result |
 | [`results/PHASE0.md`](results/PHASE0.md) | Phase 0: the lexical-null finding and the dissociation predictions |
 | [`results/PHASE05.md`](results/PHASE05.md) | Phase 0.5: dissociated 10-model panel, lexically-controlled metrics, in-house GSM8K, metric-selection verdict |
+| [`results/PHASE1_SPECIFICITY.md`](results/PHASE1_SPECIFICITY.md) | Phase 1: the specificity 2×2 — EQ_resid predicts math capability, its paraphrase mirror predicts nothing, the two are uncorrelated |
 | [`RELATED_WORK.md`](RELATED_WORK.md) | prior work, mapped to the design decision each one justifies or threatens |
 
 ### Headline finding
