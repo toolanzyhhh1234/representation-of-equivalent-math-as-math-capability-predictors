@@ -84,6 +84,11 @@ cache to `results/raw/` (gitignored, ~7 GB for 23 models × two stimulus sets).
 Data: [`uw-math-ai/MELD-dataset`](https://huggingface.co/datasets/uw-math-ai/MELD-dataset)
 — 270 equivalent pairs across 18 framings, plus 541 framing-matched hard negatives.
 
+**Raw data archive:** all hidden-state activation caches (36 GB, fp32, bit-exact
+inputs to every reported number), per-item model generations for GSM8K/MATH-500,
+ARC-Easy option logprobs, and aggregate results are public at
+[`toolazyhhh123/representation-of-equivalent-math-raw`](https://huggingface.co/datasets/toolazyhhh123/representation-of-equivalent-math-raw).
+
 ## License
 
 Apache-2.0 (see [`LICENSE`](LICENSE)). The bundled MELD data (`data/meld/`) is

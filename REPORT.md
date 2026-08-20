@@ -366,6 +366,12 @@ closest (2605.09496) uses five models without a capability regression.
 
 ## 6. Reproducibility
 
+**Raw data archive.** Every input to every reported number is public at
+[toolazyhhh123/representation-of-equivalent-math-raw](https://huggingface.co/datasets/toolazyhhh123/representation-of-equivalent-math-raw):
+the fp32 activation caches for both stimulus sets (36 GB — reusing them reproduces
+the metric tables bit-exactly without a GPU), per-item generations for GSM8K and
+MATH-500, ARC-Easy option logprobs, and the aggregate result files.
+
 - The TF-IDF null is pinned: sklearn `TfidfVectorizer(analyzer="char_wb",
   ngram_range=(3,5))` reproduces 0.7715 exactly (`analyzer="char"` gives 0.7608 — the
   distinction matters and cost us a morning).
