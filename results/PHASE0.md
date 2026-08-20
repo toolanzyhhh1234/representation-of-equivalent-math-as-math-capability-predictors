@@ -107,3 +107,60 @@ invariance >= 0.99989, fp32/fp64 parity dEQ <= 1.2e-4) pass. What it currently m
 substantially lexical. Fixing item 1-3 above is cheap -- all of it is re-analysis of
 activations already on disk, no new GPU time -- and must happen before spending the
 ~7-9 hours of download that the 25-30 model panel requires.
+
+---
+
+## 7. Addendum: reinterpretation after checking published GSM8K
+
+Section 1 above reported two of five models scoring at or below the lexical baseline as
+though it indicted the metric. Checking their actual maths ability inverts that reading.
+
+Using one consistent harness (SmolLM2 model card / paper, GSM8K 5-shot) for the three
+panel models it covers:
+
+| model | params | GSM8K | EQ (last/k1) | margin vs 0.7715 |
+|---|---|---|---|---|
+| SmolLM2-360M | 0.36B | 3.2 | 0.7352 | -0.036 |
+| Qwen2.5-0.5B | 0.49B | 33.4 | 0.7724 | +0.001 |
+| Qwen2.5-1.5B | 1.54B | 61.7 | 0.8080 | +0.037 |
+
+**SmolLM2-360M scores 3.2 on GSM8K.** A model that cannot do arithmetic *should not*
+encode mathematical equivalence above character n-grams. Its sub-baseline EQ is the metric
+being calibrated, not broken. Likewise Qwen2.5-0.5B at 33.4 landing on the baseline.
+
+```
+margin = 0.00124 * GSM8K - 0.0404          residuals +/- 0.0002
+Pearson(GSM8K, margin)      = +1.0000
+Pearson(log params, margin) = +0.9457
+```
+
+Capability fits better than size. This is the first evidence that discriminates between
+the two explanations, and it favours capability. The fit crosses zero at **GSM8K ~ 32.5**:
+below roughly 32%, a model's representation carries no more equivalence information than
+character n-grams do.
+
+**Weight this carefully.** Three points leave one residual degree of freedom, so r = 1.0000
+is far less impressive than it appears; the tight residuals (0.3% of range) are the real
+signal. Size and capability remain correlated across these three, so the fit cannot settle
+the question. And the numbers are published, from a harness that is not ours.
+
+### The prediction this licenses
+
+SmolLM2-1.7B has capability like Qwen2.5-0.5B (GSM8K 31.1) and size like Qwen2.5-1.5B
+(1.71B params), so the two hypotheses separate cleanly:
+
+| if EQ tracks | predicted EQ (last/k1) |
+|---|---|
+| capability | **0.770** |
+| size | **0.808** |
+
+A 0.038 AUROC gap, predicted in advance. Add TinyLlama-1.1B and Falcon3-1B for two more
+dissociating points, and run GSM8K in-house so the x-axis is ours rather than imported.
+
+### What this addendum does NOT overturn
+
+- Lexical leakage (sec 5.2 of METRICS.md) is untouched: EQ still contains a topical-lexical
+  term. EQ could track capability *because* stronger models embed mathematical text better,
+  in which case the correlation survives and the mechanistic claim still fails.
+- The verdict stands that the panel must decorrelate size from capability before any
+  cross-model claim is made.
