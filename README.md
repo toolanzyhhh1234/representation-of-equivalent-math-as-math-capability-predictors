@@ -68,3 +68,9 @@ EQ numbers extracted on different machines. Activations cache to `results/raw/`
 
 Data: [`uw-math-ai/MELD-dataset`](https://huggingface.co/datasets/uw-math-ai/MELD-dataset)
 — 270 equivalent pairs across 18 framings, plus 541 framing-matched hard negatives.
+
+## License
+
+Apache-2.0 (see [`LICENSE`](LICENSE)). The bundled MELD data (`data/meld/`) is
+redistributed under its own Apache-2.0 license from
+[uw-math-ai/MELD-dataset](https://huggingface.co/datasets/uw-math-ai/MELD-dataset).
