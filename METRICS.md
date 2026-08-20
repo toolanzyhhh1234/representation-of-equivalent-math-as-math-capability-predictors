@@ -220,3 +220,16 @@ its negatives leak topical lexical signal (5.2).
 Converting it into one requires either topic-matched negatives, or partialling the TF-IDF cosine
 out of the model cosine and scoring AUROC on the residual. Both are re-analysis of activations
 already cached on disk — no GPU time, no download.
+
+**Caveat on partialling, which must accompany any reported residual EQ.**
+Mathematically equivalent statements *legitimately* share vocabulary, so TF-IDF similarity and
+true semantic equivalence are genuinely correlated, not merely confounded. Regressing TF-IDF out
+therefore removes real signal along with the artifact, making the test **biased toward false
+negatives**: a near-zero residual EQ is a **lower bound**, not proof that no non-lexical signal
+exists. Sahoo et al. ([2606.02907](https://arxiv.org/abs/2606.02907) sec 7) flag the same hazard
+for their own residualization — Ridge on a near-perfect proxy "can explain nearly all variance,
+potentially removing genuine signal alongside format information."
+
+Topic-matched negatives are the complementary fix: they repair the **stimulus** rather than
+subtracting from the **measurement**, so they do not carry this bias. Run both; if they
+disagree, trust the topic-matched construction.
