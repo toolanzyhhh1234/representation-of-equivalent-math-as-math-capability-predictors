@@ -98,5 +98,20 @@
   "acc_norm": 0.7062289562289562,
   "n": 2376,
   "harness": "zero-shot per-char-normalized logprob"
+ },
+ "google/gemma-3-1b-pt": {
+  "acc_norm": 0.726010101010101,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "google/gemma-2-2b": {
+  "acc_norm": 0.805976430976431,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "meta-llama/Llama-3.2-1B": {
+  "acc_norm": 0.6279461279461279,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
  }
 }

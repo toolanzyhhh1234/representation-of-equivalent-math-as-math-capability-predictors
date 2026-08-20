@@ -1,0 +1,117 @@
+{
+ "HuggingFaceTB/SmolLM2-360M": {
+  "acc": 0.0,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2.5-0.5B": {
+  "acc": 0.11895161290322581,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen3-0.6B": {
+  "acc": 0.13306451612903225,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "TinyLlama/TinyLlama_v1.1": {
+  "acc": 0.004032258064516129,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "tiiuae/Falcon3-1B-Base": {
+  "acc": 0.10685483870967742,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "HuggingFaceTB/SmolLM2-1.7B": {
+  "acc": 0.038306451612903226,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2-1.5B": {
+  "acc": 0.19556451612903225,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2-Math-1.5B": {
+  "acc": 0.3548387096774194,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2.5-1.5B": {
+  "acc": 0.2540322580645161,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2.5-Math-1.5B": {
+  "acc": 0.4173387096774194,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "allenai/OLMo-2-0425-1B": {
+  "acc": 0.046370967741935484,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "microsoft/phi-1_5": {
+  "acc": 0.0020161290322580645,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "stabilityai/stablelm-2-1_6b": {
+  "acc": 0.014112903225806451,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "EleutherAI/pythia-1.4b": {
+  "acc": 0.0020161290322580645,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "deepseek-ai/deepseek-coder-1.3b-base": {
+  "acc": 0.008064516129032258,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "ibm-granite/granite-3.3-2b-base": {
+  "acc": 0.0907258064516129,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2-0.5B": {
+  "acc": 0.08669354838709678,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2.5-Coder-1.5B": {
+  "acc": 0.24798387096774194,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen2.5-1.5B-Instruct": {
+  "acc": 0.23387096774193547,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "Qwen/Qwen3-1.7B": {
+  "acc": 0.4092741935483871,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "google/gemma-3-1b-pt": {
+  "acc": 0.0020161290322580645,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "google/gemma-2-2b": {
+  "acc": 0.08870967741935484,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ },
+ "meta-llama/Llama-3.2-1B": {
+  "acc": 0.006048387096774193,
+  "n": 496,
+  "harness": "4-shot(first-4-items) greedy max512 boxed"
+ }
+}

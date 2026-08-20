@@ -1,15 +1,17 @@
 # Representation of Equivalent Mathematics Predicts Math Capability, Not Model Size
 
-**⚠️ PRELIMINARY TECHNICAL REPORT — v0.3, 2026-08-21.**
+**⚠️ PRELIMINARY TECHNICAL REPORT — v0.4, 2026-08-21.**
 *Shared to establish priority and invite critique; the limitations in §7 are
-load-bearing. v0.2 added the specificity control (§4.6). v0.3 doubles the panel to 20
-models across 10 families (§4.8): the capability correlation replicates out-of-family
-(ρ = +0.69, p = 0.001) but attenuates, and four new models form a clean **double
-dissociation** — formal-math representation and word-problem skill come apart in both
-directions — which narrows the metric's construct claim from "capability proxy" to
-"formal-math-representation meter." Sections 3–4.7 report the original 10-model
-phase; §4.8 supersedes their quantitative headline. Do not cite the quantitative
-claims as settled.*
+load-bearing. v0.2 added the specificity control (§4.6). v0.3 doubled the panel and
+found a double dissociation against GSM8K (§4.8). v0.4 (§4.9) adds a
+construct-matched DV (MATH-500 in-house) on the full 23-model / 12-family panel,
+which resolves it: ρ(EQ_resid, MATH-500) = +0.80 (+0.56 outside Qwen), EQ_resid
+predicts MATH-500 *beyond* GSM8K (+0.56 partial) while its GSM8K relation vanishes
+given MATH-500 (−0.14), and a clean necessity wedge appears — every model below
+EQ_resid 0.65 floors on formal math. Current claim: **EQ_resid meters formal-math
+representation, which is necessary but not sufficient for formal-math skill.**
+Sections 3–4.8 preserve the earlier phases; §4.9 is the current quantitative
+headline. Do not cite the quantitative claims as settled.*
 
 **Author:** Ian ([@toolanzyhhh1234](https://github.com/toolanzyhhh1234))
 **Repository:** all code, data pointers, per-model results, and the analysis pipeline
@@ -309,6 +311,41 @@ counts are now measured from weights, not cards (Qwen3-0.6B is actually 0.752B).
 representation — should be unusually *fragile under equivalent rewrites* of problems
 they can solve. That is the next arm.
 
+### 4.9 Phase 3 (v0.4): the construct-matched DV resolves the dissociation
+
+MATH-500 run in-house on the full panel — now **23 models / 12 families**, the gated
+tranche (Llama-3.2-1B, gemma-3-1b-pt, gemma-2-2b) included. Full detail:
+`results/PHASE3_MATH500.md`.
+
+![EQ_resid vs MATH-500](results/eq_vs_math500.png)
+
+Phase 2 left two rival readings — exposure-linked representation vs DV mismatch
+(GSM8K is word-problem arithmetic; MELD is subfield-dialect theorem text). Both were
+right, and together they simplify the result:
+
+- **ρ(EQ_resid, MATH-500) = +0.797** (p < 0.0001), vs +0.695 for GSM8K; outside Qwen
+  the gap is decisive: **+0.558 vs +0.212** — Phase 2's biggest scope limit largely
+  dissolves on the construct-matched DV.
+- **Triangulation:** ρ(EQ_resid, MATH-500 | GSM8K) = +0.556, while
+  ρ(EQ_resid, GSM8K | MATH-500) = −0.139. The metric's entire apparent relation to
+  word-problem skill was mediated by formal-math ability.
+- **The "skill without representation" corner dissolves:** phi-1.5 drops from GSM8K
+  31.3 to MATH-500 **0.2%**, OLMo-2-1B from 30.5 to **4.6%** — their low EQ_resid had
+  their formal-math floor right all along.
+- **What remains is necessity without sufficiency:** all four models with
+  EQ_resid < 0.65 score ≤ 4.6% on MATH-500, while above 0.65 performance ranges
+  0–41.7%. The exposure models (pythia, deepseek-coder, and — landed at last —
+  **Llama-3.2-1B**: GSM8K 6.0, MATH 0.6, EQ_resid 0.730) hold the representation
+  without the skill. Honest note: under Phase 0's capability-vs-size dichotomy the
+  Llama point would have muddied the story; the construct that survives all 23 models
+  is the narrowed one, not the original H1.
+
+**Current claim of the report:** EQ_resid is a lexically-controlled, math-specific,
+size-independent meter of **formal-mathematics representation**, which on this panel
+is **necessary but not sufficient** for formal-math skill. gemma-3-1b-pt closes the
+specificity loop from the general-ability side: panel-high ARC with neither math
+skill nor math representation.
+
 ## 5. Related work
 
 Detailed mapping in [`RELATED_WORK.md`](RELATED_WORK.md). Nearest neighbours: MELD
@@ -375,23 +412,25 @@ python -m src.run_panel     # extract + all metric variants (10 models, ~5 min c
 python -m src.eval_gsm8k    # in-house math capability axis (~30 min on an RTX 5090)
 python -m src.specificity   # PARA metric on PAWS (the language-side mirror)
 python -m src.eval_arc      # in-house non-math capability axis (~2 min)
+python -m src.eval_math500  # in-house formal-math capability axis (~1.5h)
 python -m src.analyze       # panel tables (sec 4.1-4.5)
 python -m src.analyze_spec  # specificity tables (sec 4.6)
-python -m src.figures && python -m src.figures_spec   # both figures
+python -m src.figures && python -m src.figures_spec && python -m src.figures_math
 ```
 
 ## Roadmap
 
 In order: (1) ~~the non-math specificity control~~ **done, v0.2 (§4.6)**; (2) ~~panel
-to N = 20 with 6 additional families~~ **done, v0.3 (§4.8)** — gated tranche
-(Llama-3.2-1B, Gemma) still pending HF access; (3) **MATH-500 as a construct-matched
-second math DV** — tests whether the §4.8 skill-without-representation models are a
-DV-mismatch artifact; (4) the GSM-Symbolic invariance arm (the actual H2), where
-Phi-1.5/OLMo-2 now carry a sharp advance prediction; (5) frozen-sentence-encoder
-partialling, purpose-built topic-matched negatives, a stronger language-side mirror
-than PAWS, and stimulus-level paired bootstraps for the tuning contrasts; (6) OLMo-2
-training-checkpoint trajectory. Falsification criteria for the full study are
-pre-committed in [`PLAN.md`](PLAN.md) §8.
+expansion + gated tranche~~ **done, v0.3–v0.4 — 23 models / 12 families**; (3)
+~~MATH-500 construct-matched DV~~ **done, v0.4 (§4.9)**; (4) the GSM-Symbolic /
+MATH-rewrite invariance arm (the actual H2) — the necessity-wedge models give it
+two-sided advance predictions; (5) the causal arm (H3): ablate the equivalence
+subspace in a high-representation model, expect disproportionate degradation on
+reformulated variants; (6) instrument hardening: frozen-sentence-encoder partialling,
+purpose-built topic-matched negatives, a stronger language-side mirror than PAWS,
+stimulus-level paired bootstraps, and a fitted (not descriptive) necessity boundary;
+(7) OLMo-2 training-checkpoint trajectory. Falsification criteria for the full study
+are pre-committed in [`PLAN.md`](PLAN.md) §8.
 
 ## Acknowledgements
 

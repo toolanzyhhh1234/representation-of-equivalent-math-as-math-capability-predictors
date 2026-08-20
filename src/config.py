@@ -62,8 +62,10 @@ PANEL = [
     ("Qwen/Qwen2.5-Coder-1.5B",      1.54),
     ("Qwen/Qwen2.5-1.5B-Instruct",   1.54),
     ("Qwen/Qwen3-1.7B",              1.72),
-    # Gated tranche -- requires an HF token + accepted licenses; added when available:
-    # meta-llama/Llama-3.2-1B (1.24), google/gemma-3-1b-pt (1.00), google/gemma-2-2b (2.61)
+    # Gated tranche (HF token + accepted licenses):
+    ("google/gemma-3-1b-pt",         1.00),
+    ("google/gemma-2-2b",            2.61),
+    ("meta-llama/Llama-3.2-1B",      1.24),
 ]
 
 # Published same-harness GSM8K (SmolLM2 paper / model cards, 5-shot) -- used only as a

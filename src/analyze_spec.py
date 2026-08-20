@@ -118,6 +118,33 @@ def t3_incremental(d):
           f"{partial_spearman(d['eq_resid'], d['arc'], d['para_resid']):+.3f}")
 
 
+def math500_check(models, d, eqh):
+    """DV-mismatch test: does a construct-matched math DV (MATH-500) realign the
+    skill-without-representation models, and does EQ_resid track it as well as GSM8K?"""
+    p = RESULTS / "math500.json"
+    if not p.exists():
+        return
+    m5 = json.loads(p.read_text())
+    have = [i for i, m in enumerate(models) if m in m5]
+    if len(have) < 4:
+        return
+    import numpy as np
+    x = np.array([d["eq_resid"][i] for i in have])
+    g = np.array([d["gsm8k"][i] for i in have])
+    a = np.array([m5[models[i]]["acc"] for i in have])
+    print(f"\n### MATH-500 (construct-matched math DV), n={len(have)}")
+    print(f"  Spearman(MATH500, GSM8K) = {stats.spearmanr(a, g).statistic:+.3f}")
+    for name, xv in (("eq_resid", x),):
+        rg, pg = perm_spearman(xv, g)
+        rm, pm = perm_spearman(xv, a)
+        print(f"  rho({name}, GSM8K) = {rg:+.3f} (p={pg:.4f})   "
+              f"rho({name}, MATH500) = {rm:+.3f} (p={pm:.4f})")
+    print(f"  {'model':<38} {'eq_resid':>9} {'GSM8K':>7} {'MATH500':>8}")
+    for i in have:
+        print(f"  {models[i]:<38} {d['eq_resid'][i]:>9.4f} "
+              f"{100*d['gsm8k'][i]:>7.1f} {100*m5[models[i]]['acc']:>8.1f}")
+
+
 if __name__ == "__main__":
     models, d, eqh, pah = load_all()
     print(f"n = {len(models)} models with all four measurements")
@@ -131,3 +158,4 @@ if __name__ == "__main__":
     t1_paired(eqh, pah)
     t2_matrix(d)
     t3_incremental(d)
+    math500_check(models, d, eqh)

@@ -17,7 +17,8 @@ from scipy import stats
 from .analyze import PRIMARY, load
 
 # Okabe-Ito, CVD-safe. Group assignment is the Phase 2 finding, fixed here.
-EXPOSURE = {"EleutherAI/pythia-1.4b", "deepseek-ai/deepseek-coder-1.3b-base"}
+EXPOSURE = {"EleutherAI/pythia-1.4b", "deepseek-ai/deepseek-coder-1.3b-base",
+            "meta-llama/Llama-3.2-1B"}
 SKILL = {"microsoft/phi-1_5", "allenai/OLMo-2-0425-1B"}
 GROUPS = [("representation without skill", "#D55E00", EXPOSURE),
           ("skill without representation", "#009E73", SKILL),

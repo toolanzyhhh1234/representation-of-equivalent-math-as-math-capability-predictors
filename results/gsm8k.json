@@ -118,5 +118,23 @@
   "n": 1319,
   "correct": 872,
   "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "google/gemma-3-1b-pt": {
+  "acc": 0.02577710386656558,
+  "n": 1319,
+  "correct": 34,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "google/gemma-2-2b": {
+  "acc": 0.21986353297952996,
+  "n": 1319,
+  "correct": 290,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "meta-llama/Llama-3.2-1B": {
+  "acc": 0.05989385898407885,
+  "n": 1319,
+  "correct": 79,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
  }
 }
