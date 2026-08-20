@@ -145,16 +145,24 @@ Run the TF-IDF baselines. Never compare to 0.5. For MELD the number is **0.7715*
 
 Report `EQ - baseline`. Applying this to the Phase 0 headline (`last/k1`):
 
-| model | EQ | margin vs 0.7715 | reading |
-|---|---|---|---|
-| SmolLM2-360M | 0.7352 | **-0.036** | below a bag of characters; no signal |
-| Qwen2.5-0.5B | 0.7724 | +0.001 | indistinguishable from lexical |
-| Qwen3-0.6B | 0.7991 | +0.028 | weak |
-| Qwen2.5-1.5B | 0.8080 | +0.037 | weak |
-| Qwen2.5-Math-1.5B | 0.8307 | +0.059 | weak |
+| model | EQ | margin vs 0.7715 | GSM8K | reading |
+|---|---|---|---|---|
+| SmolLM2-360M | 0.7352 | **-0.036** | 3.2 | at the lexical floor -- **correctly**; it cannot do maths |
+| Qwen2.5-0.5B | 0.7724 | +0.001 | 33.4 | on the baseline, matching the fitted zero-crossing |
+| Qwen3-0.6B | 0.7991 | +0.028 | n/a | small but real |
+| Qwen2.5-1.5B | 0.8080 | +0.037 | 61.7 | small but real |
+| Qwen2.5-Math-1.5B | 0.8307 | +0.059 | n/a | largest |
 
 The raw column looks like a clean monotone ordering across a 0.10 range. The margin column shows
-the actual effect is 0.00-0.06 and two models have none. **The raw ordering is mostly baseline.**
+the true effect is 0.00-0.06. **Report the margin, because the raw number is mostly baseline.**
+
+**But do not read `margin <= 0` as "the metric failed."** Check the ground truth first.
+SmolLM2-360M scores 3.2 on GSM8K; a model that cannot do arithmetic *should* sit at the lexical
+floor. Across the three panel models with same-harness GSM8K the margin is linear in capability
+(`margin = 0.00124 * GSM8K - 0.0404`, zero-crossing at GSM8K ~ 32.5), so a near-zero margin from
+a near-zero-capability model is **calibration, not failure**. Telling those two readings apart
+requires the ground truth -- which is why step 5 exists and why capability must be measured, not
+assumed.
 
 ### Step 3 — check the layer-0 control
 

@@ -6,7 +6,21 @@
 Compute: metrics 13-45 s/model, extraction 2-15 s/model on one RTX 3070. The 60-minute
 wall clock was ~55 min of HuggingFace download at ~2 MB/s, not compute.
 
-## Verdict: DO NOT SCALE YET. The metric measures too much lexical overlap.
+## Verdict: DO NOT SCALE YET -- but the panel is the problem, not the metric.
+
+Two distinct defects, which earlier drafts of this document ran together:
+
+1. **Construct validity (unresolved).** EQ contains a topical-lexical term. It could
+   track capability *because* stronger models embed mathematical text better, leaving the
+   correlation intact and the mechanistic claim dead. Fixed by topic-matched negatives or
+   by partialling TF-IDF cosine out of model cosine.
+2. **Panel confounding (unresolved).** Size and capability are near-perfectly
+   rank-correlated across the pilot panel, so no cross-model claim is identifiable. Fixed
+   by adding models where the two dissociate.
+
+What is **not** a defect, contrary to the original reading: models scoring at or below the
+lexical baseline. See sec 1 and the addendum in sec 7 -- those models cannot do arithmetic,
+and the metric is right to place them at the floor.
 
 ### 1. The decisive finding: chance is the wrong null
 
@@ -20,15 +34,27 @@ identical anchor-AUROC task.
 | TF-IDF word 1-2gram | 0.7098 |
 | **TF-IDF char 3-5gram** | **0.7715** |
 
-Against that null, the pilot's headline (pooling=last, k=1) mostly evaporates:
+Against that null, the pilot's headline (pooling=last, k=1) shrinks sharply -- but the
+shrinkage is not uniform noise, it is ordered by the models' actual maths ability
+(GSM8K, SmolLM2 5-shot harness where available; see sec 7):
 
-| model | EQ | vs TF-IDF |
-|---|---|---|
-| SmolLM2-360M | 0.7352 | **below baseline** |
-| Qwen2.5-0.5B | 0.7724 | tied |
-| Qwen3-0.6B | 0.7991 | +0.028 |
-| Qwen2.5-1.5B | 0.8080 | +0.037 |
-| Qwen2.5-Math-1.5B | 0.8307 | +0.059 |
+| model | EQ | vs TF-IDF | GSM8K |
+|---|---|---|---|
+| SmolLM2-360M | 0.7352 | -0.036 | **3.2** |
+| Qwen2.5-0.5B | 0.7724 | +0.001 | 33.4 |
+| Qwen3-0.6B | 0.7991 | +0.028 | n/a |
+| Qwen2.5-1.5B | 0.8080 | +0.037 | 61.7 |
+| Qwen2.5-Math-1.5B | 0.8307 | +0.059 | n/a |
+
+**Read the first two rows with their GSM8K column.** SmolLM2-360M scores 3.2 on GSM8K --
+it cannot do arithmetic, so it *should* sit at the lexical floor, and it does. Qwen2.5-0.5B
+at 33.4 sits essentially on the baseline, matching the zero-crossing at GSM8K ~ 32.5 fitted
+in sec 7. Sub-baseline EQ is the metric being calibrated, **not** the metric failing. An
+earlier draft of this section read it the other way and was wrong.
+
+What the baseline finding does establish is that **effect sizes are small** (0.00-0.06,
+not the 0.24-0.33 that comparing against chance would suggest) and that reporting against
+0.5 would badly overstate them.
 
 **Why**: MELD's distractors are matched to the *target's framing* but not to the
 *anchor's topic*. A true pair restates one concept, so it shares topic-specific tokens
