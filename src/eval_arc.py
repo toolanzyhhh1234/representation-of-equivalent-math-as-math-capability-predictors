@@ -6,6 +6,7 @@ One pinned harness for every model, mirroring src/eval_gsm8k.py's role on the ma
 
 Usage: python -m src.eval_arc [model ...]  -> results/arc_easy.json
 """
+import gzip
 import json
 import sys
 import time
@@ -63,11 +64,18 @@ def eval_model(model_id, examples):
         golds.append(gold)
         items.extend((prompt, o) for o in opts)
     lp = option_logprobs(tok, model, items)
-    correct = sum(int(np.argmax(lp[a:b]) == g) for (a, b), g in zip(spans, golds))
+    correct, records = 0, []
+    for q, ((a, b), g) in enumerate(zip(spans, golds)):
+        pred = int(np.argmax(lp[a:b]))
+        correct += pred == g
+        records.append({"i": q, "question": examples[q]["question"],
+                        "choices": examples[q]["choices"]["text"],
+                        "logprob_per_char": [float(v) for v in lp[a:b]],
+                        "pred": pred, "gold": g, "correct": bool(pred == g)})
     del model
     torch.cuda.empty_cache()
     return {"acc_norm": correct / len(golds), "n": len(golds),
-            "harness": "zero-shot per-char-normalized logprob"}
+            "harness": "zero-shot per-char-normalized logprob"}, records
 
 
 def main():
@@ -76,14 +84,20 @@ def main():
     print(f"ARC-Easy test n={len(examples)}", flush=True)
     path = RESULTS / "arc_easy.json"
     out = json.loads(path.read_text()) if path.exists() else {}
+    cap_dir = RESULTS / "raw_outputs" / "arc_easy"
+    cap_dir.mkdir(parents=True, exist_ok=True)
     models = sys.argv[1:] or [m for m, _ in PANEL]
     for mid in models:
-        if mid in out and not sys.argv[1:]:
+        cap = cap_dir / f"{mid.replace('/', '__')}.jsonl.gz"
+        if mid in out and cap.exists() and not sys.argv[1:]:
             print(f"=== {mid} === cached acc_norm {out[mid]['acc_norm']:.3f}", flush=True)
             continue
         print(f"=== {mid} ===", flush=True)
         t0 = time.time()
-        out[mid] = eval_model(mid, examples)
+        out[mid], records = eval_model(mid, examples)
+        with gzip.open(cap, "wt") as f:
+            for r in records:
+                f.write(json.dumps(r) + "\n")
         path.write_text(json.dumps(out, indent=1))
         print(f"  acc_norm {out[mid]['acc_norm']:.4f}  ({time.time()-t0:.0f}s)", flush=True)
 

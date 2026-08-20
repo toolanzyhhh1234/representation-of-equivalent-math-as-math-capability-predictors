@@ -12,6 +12,7 @@ Usage: python -m src.eval_gsm8k [model ...] [--limit N]
 Results merge into results/gsm8k.json; a model already present is skipped unless
 re-listed explicitly.
 """
+import gzip
 import json
 import re
 import sys
@@ -60,7 +61,7 @@ def norm(x):
 
 
 @torch.no_grad()
-def eval_model(model_id, prompts, golds):
+def eval_model(model_id, prompts, golds, questions):
     from transformers import AutoModelForCausalLM, AutoTokenizer
     tok = AutoTokenizer.from_pretrained(model_id)
     if tok.pad_token is None:
@@ -72,6 +73,7 @@ def eval_model(model_id, prompts, golds):
     order = sorted(range(len(prompts)), key=lambda i: len(prompts[i]))
     correct, n_done, t0 = 0, 0, time.time()
     preds = [None] * len(prompts)
+    records = [None] * len(prompts)
     for s in range(0, len(order), BATCH):
         idx = order[s:s + BATCH]
         enc = tok([prompts[i] for i in idx], return_tensors="pt", padding=True).to("cuda")
@@ -80,8 +82,10 @@ def eval_model(model_id, prompts, golds):
         outs = tok.batch_decode(gen[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)
         for i, g in zip(idx, outs):
             preds[i] = pred_of(g)
-            if norm(preds[i]) is not None and norm(preds[i]) == norm(golds[i]):
-                correct += 1
+            ok = norm(preds[i]) is not None and norm(preds[i]) == norm(golds[i])
+            correct += ok
+            records[i] = {"i": i, "question": questions[i], "generation": g,
+                          "pred": preds[i], "gold": golds[i], "correct": bool(ok)}
         n_done += len(idx)
         print(f"\r  {n_done}/{len(prompts)}  acc so far {correct/n_done:.3f}  "
               f"({time.time()-t0:.0f}s)", end="", flush=True)
@@ -89,7 +93,7 @@ def eval_model(model_id, prompts, golds):
     del model
     torch.cuda.empty_cache()
     return {"acc": correct / len(prompts), "n": len(prompts), "correct": correct,
-            "harness": f"{N_SHOT}-shot greedy max{MAX_NEW} first-{N_SHOT}-train-exemplars"}
+            "harness": f"{N_SHOT}-shot greedy max{MAX_NEW} first-{N_SHOT}-train-exemplars"}, records
 
 
 def main():
@@ -103,17 +107,24 @@ def main():
     test = ds["test"] if limit is None else ds["test"].select(range(limit))
     prompts = [build_prompt(shots, ex["question"]) for ex in test]
     golds = [gold_of(ex["answer"]) for ex in test]
+    questions = [ex["question"] for ex in test]
+    cap_dir = RESULTS / "raw_outputs" / "gsm8k"
+    cap_dir.mkdir(parents=True, exist_ok=True)
     print(f"GSM8K test n={len(prompts)}", flush=True)
 
     path = RESULTS / "gsm8k.json"
     out = json.loads(path.read_text()) if path.exists() else {}
     models = args or [m for m, _ in PANEL]
     for mid in models:
-        if mid in out and not args:
+        cap = cap_dir / f"{mid.replace('/', '__')}.jsonl.gz"
+        if mid in out and cap.exists() and not args:
             print(f"=== {mid} === cached: acc {out[mid]['acc']:.3f}", flush=True)
             continue
         print(f"=== {mid} ===", flush=True)
-        out[mid] = eval_model(mid, prompts, golds)
+        out[mid], records = eval_model(mid, prompts, golds, questions)
+        with gzip.open(cap, "wt") as f:
+            for r in records:
+                f.write(json.dumps(r) + "\n")
         path.write_text(json.dumps(out, indent=1))
         print(f"  acc {out[mid]['acc']:.4f}", flush=True)
 

@@ -14,6 +14,7 @@ model, so cross-model comparability -- the only thing we use -- survives.
 
 Usage: python -m src.eval_math500 [model ...]  -> results/math500.json
 """
+import gzip
 import json
 import re
 import sys
@@ -72,7 +73,7 @@ def match(pred, gold):
 
 
 @torch.no_grad()
-def eval_model(model_id, prompts, golds):
+def eval_model(model_id, prompts, golds, problems):
     from transformers import AutoModelForCausalLM, AutoTokenizer
     tok = AutoTokenizer.from_pretrained(model_id)
     if tok.pad_token is None:
@@ -82,6 +83,7 @@ def eval_model(model_id, prompts, golds):
         model_id, dtype=torch.bfloat16, attn_implementation="sdpa").cuda().eval()
     order = sorted(range(len(prompts)), key=lambda i: len(prompts[i]))
     correct, done, t0 = 0, 0, time.time()
+    records = [None] * len(prompts)
     for s in range(0, len(order), BATCH):
         idx = order[s:s + BATCH]
         enc = tok([prompts[i] for i in idx], return_tensors="pt", padding=True,
@@ -90,7 +92,12 @@ def eval_model(model_id, prompts, golds):
                              pad_token_id=tok.pad_token_id)
         outs = tok.batch_decode(gen[:, enc["input_ids"].shape[1]:], skip_special_tokens=True)
         for i, g in zip(idx, outs):
-            correct += match(boxed(g.split("Problem:")[0]), golds[i])
+            gen = g.split("Problem:")[0]
+            pred = boxed(gen)
+            ok = match(pred, golds[i])
+            correct += ok
+            records[i] = {"i": i, "problem": problems[i], "generation": g,
+                          "pred": pred, "gold": golds[i], "correct": bool(ok)}
         done += len(idx)
         print(f"\r  {done}/{len(prompts)}  acc so far {correct/done:.3f} "
               f"({time.time()-t0:.0f}s)", end="", flush=True)
@@ -98,7 +105,7 @@ def eval_model(model_id, prompts, golds):
     del model
     torch.cuda.empty_cache()
     return {"acc": correct / len(prompts), "n": len(prompts),
-            "harness": f"{N_SHOT}-shot(first-{N_SHOT}-items) greedy max{MAX_NEW} boxed"}
+            "harness": f"{N_SHOT}-shot(first-{N_SHOT}-items) greedy max{MAX_NEW} boxed"}, records
 
 
 def main():
@@ -108,16 +115,23 @@ def main():
     prompts = [f"{shots}\n\nProblem: {ex['problem']}\nSolution:"
                for ex in list(ds)[N_SHOT:]]
     golds = [ex["answer"] for ex in list(ds)[N_SHOT:]]
+    problems = [ex["problem"] for ex in list(ds)[N_SHOT:]]
+    cap_dir = RESULTS / "raw_outputs" / "math500"
+    cap_dir.mkdir(parents=True, exist_ok=True)
     print(f"MATH-500 eval n={len(prompts)}", flush=True)
     path = RESULTS / "math500.json"
     out = json.loads(path.read_text()) if path.exists() else {}
     models = sys.argv[1:] or [m for m, _ in PANEL]
     for mid in models:
-        if mid in out and not sys.argv[1:]:
+        cap = cap_dir / f"{mid.replace('/', '__')}.jsonl.gz"
+        if mid in out and cap.exists() and not sys.argv[1:]:
             print(f"=== {mid} === cached acc {out[mid]['acc']:.3f}", flush=True)
             continue
         print(f"=== {mid} ===", flush=True)
-        out[mid] = eval_model(mid, prompts, golds)
+        out[mid], records = eval_model(mid, prompts, golds, problems)
+        with gzip.open(cap, "wt") as f:
+            for r in records:
+                f.write(json.dumps(r) + "\n")
         path.write_text(json.dumps(out, indent=1))
         print(f"  acc {out[mid]['acc']:.4f}", flush=True)
 

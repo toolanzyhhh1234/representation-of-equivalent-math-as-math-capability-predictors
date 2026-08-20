@@ -10,3 +10,4 @@ results/raw/
 # (signed query parameters and account ids) from download retry warnings.
 results/*.log
 results/*.bak*
+results/raw_outputs/
