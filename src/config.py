@@ -24,3 +24,11 @@ BATCH_SIZE = 16
 PC_REMOVAL_K = [0, 1, 3]
 POOLINGS = ["last", "mean"]
 PRIMARY_POOLING = "last"
+
+# Phase 0 found fixed-k is not a safe default (results/PHASE0.md). All corrections are
+# computed; which is PRIMARY must be pre-registered on conditioning grounds, not on EQ.
+CORRECTIONS = ["k0", "k1", "k3", "gapk", "zca"]
+
+# (b): first base / math-tuned pair at identical size -- the earliest point where
+# parameter count and math training come apart.
+PAIR_MODELS = ["Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-Math-1.5B"]

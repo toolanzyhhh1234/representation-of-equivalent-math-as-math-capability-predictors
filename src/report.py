@@ -4,11 +4,11 @@ import sys
 
 import numpy as np
 
-from .config import PC_REMOVAL_K, POOLINGS, RESULTS
+from .config import CORRECTIONS, POOLINGS, RESULTS
 from .run_pilot import headline
 
 
-def table(res, pool, k):
+def table(res, pool, k="k1"):
     print(f"\n### pooling={pool}  PC-removal k={k}")
     print(f"{'model':<34} {'EQ(held-out)':>12} {'EQ(best)':>9} {'gap':>7} "
           f"{'layer':>8} {'R@1':>6} {'MRR':>6}")
@@ -22,16 +22,16 @@ def table(res, pool, k):
 def sensitivity(res, pool="last"):
     """PLAN sec 4.3: if the effect survives only at k=0, it is an anisotropy artifact."""
     print(f"\n### anisotropy sensitivity (pooling={pool}), EQ held-out")
-    print(f"{'model':<34}" + "".join(f"{'k='+str(k):>10}" for k in PC_REMOVAL_K))
+    print(f"{'model':<34}" + "".join(f"{k:>10}" for k in CORRECTIONS))
     for r in res:
-        row = "".join(f"{headline(r, pool, k)['EQ_heldout']:>10.4f}" for k in PC_REMOVAL_K)
+        row = "".join(f"{headline(r, pool, k)['EQ_heldout']:>10.4f}" for k in CORRECTIONS)
         print(f"{r['model']:<34}{row}")
 
 
-def curves(res, pool="last", k=1):
+def curves(res, pool="last", k="k1"):
     print(f"\n### EQ by relative depth (pooling={pool}, k={k}) -- chance = 0.500")
     for r in res:
-        c = r["curves"][f"{pool}|k{k}"]
+        c = r["curves"][f"{pool}|{k}"]
         n = len(c)
         marks = [int(round(f * (n - 1))) for f in (0, .25, .5, .75, 1.0)]
         vals = "  ".join(f"{c[i]['auroc_anchor']:.3f}@{i}" for i in marks)
@@ -39,7 +39,7 @@ def curves(res, pool="last", k=1):
         print(f"{r['model']:<34} {vals}   peak {peak['auroc_anchor']:.3f}@L{peak['layer']}")
 
 
-def plot(res, pool="last", k=1, path=None):
+def plot(res, pool="last", k="k1", path=None):
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -49,7 +49,7 @@ def plot(res, pool="last", k=1, path=None):
         return
     fig, ax = plt.subplots(figsize=(7, 4.2))
     for r in res:
-        c = r["curves"][f"{pool}|k{k}"]
+        c = r["curves"][f"{pool}|{k}"]
         y = [x["auroc_anchor"] for x in c]
         x = np.linspace(0, 1, len(y))
         ax.plot(x, y, marker="o", ms=2.5, lw=1.4, label=r["model"].split("/")[-1])
@@ -67,8 +67,9 @@ def plot(res, pool="last", k=1, path=None):
 if __name__ == "__main__":
     res = json.loads((RESULTS / "pilot.json").read_text())
     for pool in POOLINGS:
-        table(res, pool, 1)
+        for m in CORRECTIONS:
+            table(res, pool, m)
     sensitivity(res, "last")
     sensitivity(res, "mean")
-    curves(res, "last", 1)
-    plot(res, "last", 1)
+    curves(res, "last", "gapk")
+    plot(res, "last", "gapk")

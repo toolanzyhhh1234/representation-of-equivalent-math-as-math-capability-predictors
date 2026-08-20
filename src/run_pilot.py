@@ -10,9 +10,28 @@ import numpy as np
 import torch
 
 from .config import PC_REMOVAL_K, PILOT_MODELS, POOLINGS, PRIMARY_POOLING, RAW, RESULTS
+from .correct import gap_k, spectrum, topk, zca
 from .data import load_meld
 from .extract import extract, load, verify_padding_invariance
-from .metrics import build_gold_map, correct_multi, eq_scores, retrieval
+from .metrics import build_gold_map, eq_scores, retrieval
+
+
+def corrections(X):
+    """All anisotropy corrections for one layer. {name: normalised np.ndarray}.
+
+    fp32 GPU throughout; parity vs the fp64 CPU reference is checked in tests/test_parity.
+    gap_k is adaptive: it removes only directions that are well separated from the next
+    one, because a direction with s_i/s_{i+1} ~ 1 is not identified and removing it
+    injects noise. Anisotropy varies from 10% to 99% of variance across layers, so a
+    fixed k cannot be right everywhere.
+    """
+    out = {f"k{k}": v for k, v in topk(X, PC_REMOVAL_K).items()}
+    kg = gap_k(X)
+    out["gapk"] = out[f"k{kg}"] if f"k{kg}" in out else topk(X, [kg])[kg]
+    out["zca"] = zca(X)
+    sp = spectrum(X)
+    meta = {"gap_k": kg, "s1_s2": float(sp["ratios"][0]), "var_pc1": float(sp["cumvar"][0])}
+    return {k: v.cpu().numpy() for k, v in out.items()}, meta
 
 
 def domain_stratified_split(stim, seed=0):
@@ -57,15 +76,14 @@ def run_model(model_id, stim, gold):
     curves = {}
     for pool in POOLINGS:
         for layer in range(n_layers):
-            Xs = correct_multi(acts[pool][:, layer, :], PC_REMOVAL_K)
-            for k, Xn in Xs.items():
-                key = f"{pool}|k{k}"
-                rec = {"layer": layer}
+            Xs, meta = corrections(acts[pool][:, layer, :])
+            for name, Xn in Xs.items():
+                rec = {"layer": layer, **meta}
                 rec.update(eq_scores(Xn, stim))
                 rec["auroc_a"] = eq_scores(Xn, stim, split_a)["auroc_anchor"]
                 rec["auroc_b"] = eq_scores(Xn, stim, split_b)["auroc_anchor"]
                 rec.update(retrieval(Xn, stim, gold))
-                curves.setdefault(key, []).append(rec)
+                curves.setdefault(f"{pool}|{name}", []).append(rec)
         print(f"  metrics {pool} done ({time.time() - t0:.1f}s)")
 
     return {
@@ -75,9 +93,9 @@ def run_model(model_id, stim, gold):
     }
 
 
-def headline(res, pool=PRIMARY_POOLING, k=1):
+def headline(res, pool=PRIMARY_POOLING, k="k1"):
     """Layer picked on split A, EQ reported on split B -- no selection on the reported number."""
-    c = res["curves"][f"{pool}|k{k}"]
+    c = res["curves"][f"{pool}|{k}"]
     best = max(c, key=lambda r: r["auroc_a"])
     best_all = max(c, key=lambda r: r["auroc_anchor"])
     return {
