@@ -79,12 +79,59 @@ Further documentation that equivalent surface forms produce very different outco
 ## 4. Threats to our instrument (read these before believing a result)
 
 **[Linear Probes Detect Task Format, Not Reasoning Mode in Language Model Hidden
-States](https://www.alphaxiv.org/abs/2606.02907)** (2606.02907)
-**The direct methodological attack on our measurement.** Probing hidden states is widely used
-to claim models learn distinct representations for different reasoning types; this paper tests
-that on Qwen3-14B and finds the probes are reading **task format**. Our defence is the
-hard-negative construction, the layer-0 control, and the causal arm -- and Phase 0 showed the
-concern is warranted, since our metric does carry a substantial lexical component.
+States](https://arxiv.org/abs/2606.02907)** (2606.02907v2; Sahoo, Jain, Chadha, Chaudhary)
+The methodological attack on this style of measurement, and worth reading in full.
+
+*What they show.* Qwen3-14B, thinking disabled (CoT traces would themselves be a format
+confound). 750 tasks: LogiQA 2.0 / ARC-Challenge / alphaNLI as deductive / inductive /
+abductive, labels by dataset provenance. At layer 32 a linear probe reaches **100% CV
+accuracy** with clean manifold separation (intrinsic dims 20.6 / 28.5 / 33.6, hull
+contamination <= 1.5%) -- their own caption calls this "exactly the kind of evidence typically
+cited for mode-specific internal representations." Then:
+
+| stage | result |
+|---|---|
+| probe for *dataset source* instead of mode | 100% -- informationally identical to the mode probe |
+| option count alone (2 vs 4 choices) | 33.3%, exactly the alphaNLI prior |
+| restrict to 4-choice tasks only | still near-perfect: vocabulary/domain separate too |
+| **residualize** `[source one-hot, n_options, response length]`, re-probe | **100% -> 33.5% ~ chance** |
+
+Converging evidence: trace-mode agreement 42.5% vs 33.3% chance (uniform strategy despite 86%
+accuracy), and steering with 20 random-direction controls gives targeted 40.0% vs random 31.7%,
+p = 0.286, Cohen's d < 0.5.
+
+*Does it apply to us? Not its mechanism, but fully its principle.*
+
+- **Not directly**, for two structural reasons. We train no probe -- EQ is an unsupervised
+  ranking statistic, so "the classifier learned a label proxy" has no analogue. And our labels
+  are not confounded with dataset source: every stimulus comes from one file and one generation
+  process, so the perfect source-equals-label confound driving their whole result is absent.
+- **But entirely in principle.** Their generalizable claim is that separation is evidence for
+  the construct only once surface features correlated with the label are ruled out. Our surface
+  feature is topical lexical overlap rather than source identity, and Phase 0 found it
+  (TF-IDF = 0.7715). We rediscovered their lesson in a different guise. Their recommendation
+  "report source-prediction accuracy alongside mode-prediction accuracy" maps onto our rule
+  "report the lexical baseline alongside every EQ number."
+
+*The part that changes our next experiment.* Their residualization **is** the TF-IDF partialling
+we plan. They flag its weakness themselves (sec 7): Ridge on a near-perfect proxy "can explain
+nearly all variance, potentially removing genuine signal alongside format information." That
+bites harder for us: mathematically equivalent statements *legitimately* share vocabulary, so
+TF-IDF similarity and true equivalence are genuinely correlated rather than merely confounded.
+Partialling therefore removes real signal with the artifact and is **biased toward false
+negatives**. Report residual EQ as a **lower bound**, and pair it with topic-matched negatives,
+which repair the stimulus instead of subtracting from the measurement.
+
+*Its own weaknesses.* A workshop paper on a **single model**; the headline residualization is
+close to tautological (regressing out a variable that *is* the label will kill any probe of
+that label -- they acknowledge this); and the steering null is underpowered at 15 evaluation
+tasks, where 20 random directions give p-value granularity of 1/21, so p = 0.286 means 5 of 20
+controls matched. Directionally right, quantitatively soft. Take the method, not the effect
+sizes.
+
+*What we adopt from it:* residualization as a control (with the lower-bound caveat), and
+**random-direction controls for the H3 steering/ablation arm** -- targeted ablation must be
+compared against matched random subspaces of equal dimension, not against no ablation.
 
 **[Convergence Without Understanding: When Language Models Agree on Representations but
 Disagree on Reasoning](https://www.alphaxiv.org/abs/2605.23315)** (2605.23315)
