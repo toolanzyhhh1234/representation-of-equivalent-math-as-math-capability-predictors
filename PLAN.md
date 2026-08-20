@@ -1,6 +1,7 @@
 # Representation of Equivalent Math as a Predictor of Math Capability
 
-**Status:** draft plan, pre-data
+**Status:** draft plan, revised after Phase 0
+**Prior work:** see [`RELATED_WORK.md`](RELATED_WORK.md) for the load-bearing citations behind each choice below
 **Unit of analysis:** the *model*, not the problem. This is the constraint everything else bends around.
 
 ---

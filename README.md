@@ -11,6 +11,7 @@ equivalent reformulations?
 | [`PLAN.md`](PLAN.md) | full design: hypotheses, panel, statistics, falsification criteria, compute budget |
 | [`METRICS.md`](METRICS.md) | what EQ is, why the statistic is valid, where its validity breaks, and a 6-step procedure for reading a result |
 | [`results/PHASE0.md`](results/PHASE0.md) | Phase 0 findings and verdict |
+| [`RELATED_WORK.md`](RELATED_WORK.md) | prior work, mapped to the design decision each one justifies or threatens |
 
 ### Headline finding
 
