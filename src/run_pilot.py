@@ -55,17 +55,17 @@ def run_model(model_id, stim, gold):
     t_load = time.time() - t0
 
     inv = verify_padding_invariance(tok, model, stim.texts)
-    print(f"  padding invariance: {inv}  (>=0.999 required)")
+    print(f"  padding invariance: {inv}  (>=0.999 required)", flush=True)
 
     t0 = time.time()
     acts = extract(tok, model, stim.texts,
                    progress=lambda d, n: print(f"\r  extract {d}/{n}", end="", flush=True))
     t_ext = time.time() - t0
-    print(f"\r  extract {len(stim.texts)}/{len(stim.texts)}  ({t_ext:.1f}s)")
+    print(f"\r  extract {len(stim.texts)}/{len(stim.texts)}  ({t_ext:.1f}s)", flush=True)
 
     n_layers = acts[PRIMARY_POOLING].shape[1]
     hid = acts[PRIMARY_POOLING].shape[2]
-    np.savez_compressed(RAW / f"{model_id.replace('/', '__')}.npz", **acts)
+    np.savez(RAW / f"{model_id.replace('/', '__')}.npz", **acts)  # uncompressed: ~1 min/model faster
 
     del model
     gc.collect()
@@ -84,7 +84,7 @@ def run_model(model_id, stim, gold):
                 rec["auroc_b"] = eq_scores(Xn, stim, split_b)["auroc_anchor"]
                 rec.update(retrieval(Xn, stim, gold))
                 curves.setdefault(f"{pool}|{name}", []).append(rec)
-        print(f"  metrics {pool} done ({time.time() - t0:.1f}s)")
+        print(f"  metrics {pool} done ({time.time() - t0:.1f}s)", flush=True)
 
     return {
         "model": model_id, "n_layers": n_layers, "hidden": hid,
@@ -116,13 +116,16 @@ def main():
           f"{sum(len(v) for v in stim.distractors.values())} hard negatives\n")
 
     models = sys.argv[1:] or PILOT_MODELS
-    out = []
+    path = RESULTS / "pilot.json"
+    # Merge, never clobber: running one model must not delete the rest of the panel.
+    out = json.loads(path.read_text()) if path.exists() else []
     for mid in models:
-        print(f"=== {mid} ===")
+        print(f"=== {mid} ===", flush=True)
         r = run_model(mid, stim, gold)
-        out.append(r)
-        (RESULTS / "pilot.json").write_text(json.dumps(out, indent=1))
-        print(f"  headline: {headline(r)}\n")
+        out = [x for x in out if x["model"] != mid] + [r]
+        out.sort(key=lambda x: models.index(x["model"]) if x["model"] in models else 99)
+        path.write_text(json.dumps(out, indent=1))
+        print(f"  headline: {headline(r)}\n", flush=True)
 
     print("=== PHASE 0 GATE ===")
     print(f"{'model':<34} {'EQ(held-out)':>13} {'layer':>7} {'R@1':>7} {'MRR':>7}")

@@ -5,6 +5,10 @@ import sys
 import numpy as np
 
 from .config import CORRECTIONS, POOLINGS, RESULTS
+
+# Non-neural null measured on the identical anchor-AUROC task (see results/PHASE0.md).
+# Chance (0.5) is NOT the right null for this benchmark.
+TFIDF_CHAR = 0.7715
 from .run_pilot import headline
 
 
@@ -54,6 +58,8 @@ def plot(res, pool="last", k="k1", path=None):
         x = np.linspace(0, 1, len(y))
         ax.plot(x, y, marker="o", ms=2.5, lw=1.4, label=r["model"].split("/")[-1])
     ax.axhline(0.5, ls="--", c="0.5", lw=1, label="chance")
+    ax.axhline(TFIDF_CHAR, ls=":", c="crimson", lw=1.6,
+               label=f"TF-IDF char 3-5gram baseline ({TFIDF_CHAR:.3f})")
     ax.set_xlabel("relative depth (layer / n_layers)")
     ax.set_ylabel("EQ  (anchor AUROC vs framing-matched hard negatives)")
     ax.set_title(f"MELD equivalence discrimination — pooling={pool}, top-{k} PC removed")
@@ -71,5 +77,5 @@ if __name__ == "__main__":
             table(res, pool, m)
     sensitivity(res, "last")
     sensitivity(res, "mean")
-    curves(res, "last", "gapk")
-    plot(res, "last", "gapk")
+    curves(res, "last", "k1")
+    plot(res, "last", "k1")
