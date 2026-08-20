@@ -50,6 +50,20 @@ PANEL = [
     ("Qwen/Qwen2-Math-1.5B",         1.54),
     ("Qwen/Qwen2.5-1.5B",            1.54),
     ("Qwen/Qwen2.5-Math-1.5B",       1.54),
+    # Phase 2 expansion, ungated tranche: 6 new families + within-Qwen contrasts.
+    # params(B) are card values; extraction records the measured count as ground truth.
+    ("allenai/OLMo-2-0425-1B",       1.48),
+    ("microsoft/phi-1_5",            1.42),
+    ("stabilityai/stablelm-2-1_6b",  1.64),
+    ("EleutherAI/pythia-1.4b",       1.41),
+    ("deepseek-ai/deepseek-coder-1.3b-base", 1.35),
+    ("ibm-granite/granite-3.3-2b-base", 2.53),
+    ("Qwen/Qwen2-0.5B",              0.49),
+    ("Qwen/Qwen2.5-Coder-1.5B",      1.54),
+    ("Qwen/Qwen2.5-1.5B-Instruct",   1.54),
+    ("Qwen/Qwen3-1.7B",              1.72),
+    # Gated tranche -- requires an HF token + accepted licenses; added when available:
+    # meta-llama/Llama-3.2-1B (1.24), google/gemma-3-1b-pt (1.00), google/gemma-2-2b (2.61)
 ]
 
 # Published same-harness GSM8K (SmolLM2 paper / model cards, 5-shot) -- used only as a

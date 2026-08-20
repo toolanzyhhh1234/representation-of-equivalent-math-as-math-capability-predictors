@@ -1,12 +1,15 @@
 # Representation of Equivalent Mathematics Predicts Math Capability, Not Model Size
 
-**⚠️ PRELIMINARY TECHNICAL REPORT — v0.2, 2026-08-20.**
-*This is an early-stage result on a 10-model panel, shared to establish priority and
-invite critique. The limitations in §7 are load-bearing: the headline correlation is
-robust within this panel, but the panel is small and family-imbalanced. v0.2 adds the
-specificity control (§4.7): the "general representation quality" alternative
-explanation is now tested and disfavoured. Do not cite the quantitative claims as
-settled.*
+**⚠️ PRELIMINARY TECHNICAL REPORT — v0.3, 2026-08-21.**
+*Shared to establish priority and invite critique; the limitations in §7 are
+load-bearing. v0.2 added the specificity control (§4.6). v0.3 doubles the panel to 20
+models across 10 families (§4.8): the capability correlation replicates out-of-family
+(ρ = +0.69, p = 0.001) but attenuates, and four new models form a clean **double
+dissociation** — formal-math representation and word-problem skill come apart in both
+directions — which narrows the metric's construct claim from "capability proxy" to
+"formal-math-representation meter." Sections 3–4.7 report the original 10-model
+phase; §4.8 supersedes their quantitative headline. Do not cite the quantitative
+claims as settled.*
 
 **Author:** Ian ([@toolanzyhhh1234](https://github.com/toolanzyhhh1234))
 **Repository:** all code, data pointers, per-model results, and the analysis pipeline
@@ -265,6 +268,47 @@ tracking +0.82, jackknife floor +0.74) and is pre-registered as the primary metr
 the full panel, with `EQ_hard` as the bias-free audit and raw EQ + TF-IDF margin
 reported for continuity. Full table: `results/PHASE05.md` §4.
 
+### 4.8 Phase 2 (v0.3): the 20-model panel and the double dissociation
+
+Doubling the panel to 20 models across 10 families (adding OLMo-2, Phi-1.5,
+StableLM-2, Pythia, DeepSeek-Coder, Granite, and four Qwen variants including a
+code-tuned 1.5B) is the out-of-family test of everything above. Full detail:
+`results/PHASE2_PANEL20.md`.
+
+**Replication with attenuation.** ρ(EQ_resid, GSM8K) = **+0.687** (p = 0.001) at
+n = 20, versus +0.82 at n = 10; size stays dead (ρ = +0.33 n.s., partial +0.08), and
+the specificity 2×2 holds (EQ×ARC +0.16; EQ ⊥ PARA −0.10; both contrast CIs exclude
+zero).
+
+**The double dissociation.** Pythia-1.4b (GSM8K 2.2) and DeepSeek-Coder-1.3b (4.2)
+score EQ_resid ≈ 0.71 — *representation without skill* — while Phi-1.5 (31.3) and
+OLMo-2-1B (30.5) score 0.58–0.60, with Phi's audit metric at chance — *skill without
+representation*. The signals are genuine (mid-network peaks, confirmed by the
+restriction-based audit). The natural reading is training-data exposure: Pile/arXiv
+and code-corpus models represent formal mathematical prose without being able to
+solve problems; synthetic-textbook and GSM-mid-trained models solve word problems
+without representing subfield-dialect theorem text. Accordingly the construct claim
+narrows: **EQ_resid meters formal-math representation, which training recipes may or
+may not couple to skill** — the correlation with capability holds across coarse
+capability differences and within recipe-consistent families (the jackknife is stable
+for every family except Qwen; dropping all ten Qwen models leaves ρ = +0.21), and
+should not be trusted to rank heterogeneous-recipe models of similar capability. An
+alternative testable reading is DV mismatch (GSM8K is word-problem arithmetic, MELD
+is theorem equivalence; a MATH-level DV might realign Phi/OLMo — roadmap).
+
+**Control tuning arms.** At fixed 1.54B, math tuning raises EQ_resid (+0.008, +0.045),
+**coder tuning lowers it (−0.018)**, instruct tuning sits between (+0.009) — the
+cleanest fixed-size specificity evidence yet.
+
+**Protocol hardening.** Layer 0 is now excluded from headline layer selection (it is
+the control layer; DeepSeek-Coder's tokenizer produced a lexical leak there that
+char-TF-IDF cannot residualize, and the selection rule had picked it). Parameter
+counts are now measured from weights, not cards (Qwen3-0.6B is actually 0.752B).
+
+**Sharpest H2 prediction this creates:** Phi-1.5 and OLMo-2 — skill without
+representation — should be unusually *fragile under equivalent rewrites* of problems
+they can solve. That is the next arm.
+
 ## 5. Related work
 
 Detailed mapping in [`RELATED_WORK.md`](RELATED_WORK.md). Nearest neighbours: MELD
@@ -303,9 +347,14 @@ closest (2605.09496) uses five models without a capability regression.
    tuning specifically move only the math metric?) is inconclusive at current
    measurement precision, and PAWS may be too weak an instrument to detect shared
    variance on the metric side. A mechanistic (causal) claim still requires §7.5.
-2. **N = 10, 6 of them Qwen.** The jackknife shows no single family drives the result,
-   but the family-at-fixed-capability effect in §4.5 is real and unresolved. The
-   non-Qwen minority is 4 points.
+2. **Scope of the proxy (v0.3).** At n = 20 the jackknife is stable for 9 of 10
+   families, but dropping the ten Qwen models leaves ρ = +0.21: the correlation is
+   carried by coarse capability contrasts and recipe-consistent comparisons, with
+   within-cluster range restriction and the §4.8 dissociation limiting fine-grained
+   ranking across heterogeneous recipes. Treat EQ_resid as a formal-math-representation
+   meter with predictable exceptions (Pile/code-exposure models overscore relative to
+   skill; synthetic-textbook/GSM-trained models underscore), not a universal
+   capability meter.
 3. **EQ_resid is a lower bound** (§2.4): partialling removes legitimate shared
    vocabulary along with the artifact. Conclusions from low residuals (e.g. TinyLlama
    at null) are conservative in the safe direction, but absolute levels understate.
@@ -333,13 +382,16 @@ python -m src.figures && python -m src.figures_spec   # both figures
 
 ## Roadmap
 
-In order: (1) ~~the non-math specificity control~~ **done, v0.2 (§4.6)**; (2) panel to
-N = 25–30 with ≥ 3 additional non-Qwen families; (3) the GSM-Symbolic invariance arm
-(the actual H2); (4) frozen-sentence-encoder partialling and purpose-built
-topic-matched negatives, plus a stronger language-side mirror than PAWS and
-stimulus-level paired bootstraps to settle the T1 tuning contrast; (5) OLMo-2
-training-checkpoint trajectory (does EQ rise before, with, or after capability).
-Falsification criteria for the full study are pre-committed in [`PLAN.md`](PLAN.md) §8.
+In order: (1) ~~the non-math specificity control~~ **done, v0.2 (§4.6)**; (2) ~~panel
+to N = 20 with 6 additional families~~ **done, v0.3 (§4.8)** — gated tranche
+(Llama-3.2-1B, Gemma) still pending HF access; (3) **MATH-500 as a construct-matched
+second math DV** — tests whether the §4.8 skill-without-representation models are a
+DV-mismatch artifact; (4) the GSM-Symbolic invariance arm (the actual H2), where
+Phi-1.5/OLMo-2 now carry a sharp advance prediction; (5) frozen-sentence-encoder
+partialling, purpose-built topic-matched negatives, a stronger language-side mirror
+than PAWS, and stimulus-level paired bootstraps for the tuning contrasts; (6) OLMo-2
+training-checkpoint trajectory. Falsification criteria for the full study are
+pre-committed in [`PLAN.md`](PLAN.md) §8.
 
 ## Acknowledgements
 

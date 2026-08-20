@@ -133,13 +133,14 @@ def run_model(model_id, texts, ij, labels, L_pair, mask_a, mask_b):
         torch.cuda.empty_cache()
     print(f"  metrics done ({time.time() - t0:.1f}s)", flush=True)
 
-    # headline: layer on split A, report split B; bootstrap CI over pairs at that layer
+    # headline: layer on split A, report split B; bootstrap CI over pairs at that layer.
+    # Layer 0 excluded from selection -- it is the token-identity control (see run_panel).
     headlines = {}
     for key, recs in curves.items():
         pool, name = key.split("|")
         A = torch.tensor(acts[pool], device="cuda")
         for v in VARIANTS:
-            best = max(recs, key=lambda r: r[f"{v}_a"])
+            best = max(recs[1:], key=lambda r: r[f"{v}_a"])
             Xs, _ = corrections_gpu(A[:, best["layer"], :])
             S = pair_scores(Xs[name].double().cpu().numpy(), ij)
             b = np.polyfit(L_pair, S, 1)[0]

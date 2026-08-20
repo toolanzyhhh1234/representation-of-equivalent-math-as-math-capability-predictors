@@ -56,19 +56,25 @@ def get_acts(model_id, stim):
     path = RAW / f"{model_id.replace('/', '__')}.npz"
     if path.exists():
         z = np.load(path)
-        return {k: z[k] for k in z.files}, {"cached": True}
+        pf = RAW / f"{model_id.replace('/', '__')}.params"
+        info = {"cached": True}
+        if pf.exists():
+            info["n_params"] = int(pf.read_text())
+        return {k: z[k] for k in z.files}, info
     tok, model = load(model_id)
+    n_params = sum(p.numel() for p in model.parameters())
     inv = verify_padding_invariance(tok, model, stim.texts)
-    print(f"  padding invariance: {inv}", flush=True)
+    print(f"  padding invariance: {inv}   params: {n_params/1e9:.3f}B", flush=True)
     t0 = time.time()
     acts = extract(tok, model, stim.texts,
                    progress=lambda d, n: print(f"\r  extract {d}/{n}", end="", flush=True))
     print(f"\r  extract done ({time.time() - t0:.1f}s)", flush=True)
     np.savez(path, **acts)
+    (RAW / f"{model_id.replace('/', '__')}.params").write_text(str(n_params))
     del model
     gc.collect()
     torch.cuda.empty_cache()
-    return acts, {"cached": False, "padding_invariance": inv}
+    return acts, {"cached": False, "padding_invariance": inv, "n_params": n_params}
 
 
 def run_model(model_id, stim, jobs, L, mask_a, mask_b):
@@ -93,13 +99,16 @@ def run_model(model_id, stim, jobs, L, mask_a, mask_b):
         print(f"  metrics {pool} done ({time.time() - t0:.1f}s)", flush=True)
 
     # headline per (setting, variant): layer argmax on split A, report split B,
-    # bootstrap CI over pairs at that layer.
+    # bootstrap CI over pairs at that layer. Layer 0 is excluded from selection: it is
+    # the token-identity CONTROL layer (METRICS.md sec 6 step 3), and deepseek-coder
+    # showed a tokenizer-channel lexical leak can make it the split-A argmax -- selecting
+    # the control as the readout contradicts the construct being measured.
     headlines = {}
     for key, recs in curves.items():
         pool, name = key.split("|")
         A = torch.tensor(acts[pool], device="cuda")
         for v in VARIANTS:
-            best = max(recs, key=lambda r: r[f"{v}_a"])
+            best = max(recs[1:], key=lambda r: r[f"{v}_a"])
             Xs, _ = corrections_gpu(A[:, best["layer"], :])
             S = (Xs[name] @ Xs[name].T).double().cpu().numpy()
             var = eq_variants(S, jobs, L)

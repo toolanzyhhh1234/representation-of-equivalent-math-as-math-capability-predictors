@@ -10,14 +10,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy import stats
 
-from .analyze import family_of
 from .analyze_spec import load_all
 from .config import RESULTS
-from .figures import FAM_COLOR, SHORT
+from .figures import color_of
 
 
 def cell(ax, x, y, models, xlabel, ylabel, title):
-    cols = [FAM_COLOR[family_of(m)] for m in models]
+    cols = [color_of(m) for m in models]
     ax.scatter(100 * x, y, c=cols, s=34, zorder=3)
     rho = stats.spearmanr(x, y).statistic
     ax.set_title(f"{title}   rho = {rho:+.2f}", fontsize=9.5)
@@ -39,9 +38,10 @@ def main():
          "GSM8K (%)", "PARA_resid (PAWS, language)", "language metric x math DV")
     cell(axes[1, 1], d["arc"], d["para_resid"], models,
          "ARC-Easy (%)", "PARA_resid (PAWS, language)", "language metric x language DV")
-    handles = [plt.Line2D([], [], marker="o", ls="", color=c, label=f)
-               for f, c in FAM_COLOR.items()]
-    axes[0, 1].legend(handles=handles, fontsize=7.5, loc="lower right", framealpha=0.9)
+    from .figures import GROUPS
+    handles = [plt.Line2D([], [], marker="o", ls="", color=c, label=lab)
+               for lab, c, _ in GROUPS]
+    axes[0, 1].legend(handles=handles, fontsize=7, loc="lower right", framealpha=0.9)
     fig.suptitle("Specificity 2x2: only the math-metric x math-DV cell carries signal",
                  fontsize=11)
     fig.tight_layout()

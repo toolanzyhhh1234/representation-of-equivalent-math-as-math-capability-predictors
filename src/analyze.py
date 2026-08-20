@@ -100,14 +100,20 @@ def partial_spearman(x, y, z):
     return stats.pearsonr(resid(rx, rz), resid(ry, rz)).statistic
 
 
+def params_of(r):
+    """Measured parameter count when extraction recorded it, else the card value."""
+    if r.get("n_params"):
+        return r["n_params"] / 1e9
+    return dict(PANEL)[r["model"]]
+
+
 def tracking(base, models, gsm):
-    params = dict(PANEL)
     have = [r for r in models if r["model"] in gsm]
     if len(have) < 4:
         print("\n(no in-house GSM8K yet -- run python -m src.eval_gsm8k)")
         return
     cap = [gsm[r["model"]]["acc"] for r in have]
-    size = [np.log10(params[r["model"]]) for r in have]
+    size = [np.log10(params_of(r)) for r in have]
     print(f"\n### tracking, n={len(have)} models: capability (in-house GSM8K) vs size")
     print(f"  Spearman(GSM8K, log params) = {stats.spearmanr(cap, size).statistic:+.3f} "
           f"(panel dissociation check)")
@@ -184,14 +190,18 @@ def prediction(base, models, gsm):
 
 
 def pairs(base, models):
-    print("\n### base vs math-tuned at identical size (margin over each variant's null)")
-    P = [("Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-Math-1.5B"),
-         ("Qwen/Qwen2-1.5B", "Qwen/Qwen2-Math-1.5B")]
+    """Same-size tuning contrasts. Math pairs are the hypothesis; coder/instruct pairs
+    are controls -- non-math post-training at identical size should move EQ less."""
+    P = [("Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-Math-1.5B", "math"),
+         ("Qwen/Qwen2-1.5B", "Qwen/Qwen2-Math-1.5B", "math"),
+         ("Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-Coder-1.5B", "coder (control)"),
+         ("Qwen/Qwen2.5-1.5B", "Qwen/Qwen2.5-1.5B-Instruct", "instruct (control)")]
+    print("\n### same-size tuning contrasts (delta on held-out score)")
     byid = {r["model"]: r for r in models}
-    for a, b in P:
+    for a, b, kind in P:
         if a not in byid or b not in byid:
             continue
-        print(f"  {a.split('/')[-1]} -> {b.split('/')[-1]}")
+        print(f"  {a.split('/')[-1]} -> {b.split('/')[-1]}   [{kind}]")
         for v in VARIANTS:
             ha = byid[a]["headlines"][f"{PRIMARY}|{v}"]
             hb = byid[b]["headlines"][f"{PRIMARY}|{v}"]

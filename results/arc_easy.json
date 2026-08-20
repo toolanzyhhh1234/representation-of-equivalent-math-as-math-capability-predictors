@@ -48,5 +48,55 @@
   "acc_norm": 0.648989898989899,
   "n": 2376,
   "harness": "zero-shot per-char-normalized logprob"
+ },
+ "allenai/OLMo-2-0425-1B": {
+  "acc_norm": 0.7407407407407407,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "microsoft/phi-1_5": {
+  "acc_norm": 0.7386363636363636,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "stabilityai/stablelm-2-1_6b": {
+  "acc_norm": 0.6902356902356902,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "EleutherAI/pythia-1.4b": {
+  "acc_norm": 0.5437710437710438,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "deepseek-ai/deepseek-coder-1.3b-base": {
+  "acc_norm": 0.4313973063973064,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "ibm-granite/granite-3.3-2b-base": {
+  "acc_norm": 0.7537878787878788,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2-0.5B": {
+  "acc_norm": 0.5126262626262627,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2.5-Coder-1.5B": {
+  "acc_norm": 0.6818181818181818,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen2.5-1.5B-Instruct": {
+  "acc_norm": 0.7668350168350169,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
+ },
+ "Qwen/Qwen3-1.7B": {
+  "acc_norm": 0.7062289562289562,
+  "n": 2376,
+  "harness": "zero-shot per-char-normalized logprob"
  }
 }

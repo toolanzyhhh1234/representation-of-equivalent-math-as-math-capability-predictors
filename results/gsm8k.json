@@ -58,5 +58,65 @@
   "n": 1319,
   "correct": 960,
   "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "allenai/OLMo-2-0425-1B": {
+  "acc": 0.30477634571645185,
+  "n": 1319,
+  "correct": 402,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "microsoft/phi-1_5": {
+  "acc": 0.31311599696739956,
+  "n": 1319,
+  "correct": 413,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "stabilityai/stablelm-2-1_6b": {
+  "acc": 0.2137983320697498,
+  "n": 1319,
+  "correct": 282,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "EleutherAI/pythia-1.4b": {
+  "acc": 0.021986353297952996,
+  "n": 1319,
+  "correct": 29,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "deepseek-ai/deepseek-coder-1.3b-base": {
+  "acc": 0.04169825625473844,
+  "n": 1319,
+  "correct": 55,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "ibm-granite/granite-3.3-2b-base": {
+  "acc": 0.4874905231235785,
+  "n": 1319,
+  "correct": 643,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2-0.5B": {
+  "acc": 0.354814253222138,
+  "n": 1319,
+  "correct": 468,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2.5-Coder-1.5B": {
+  "acc": 0.555724033358605,
+  "n": 1319,
+  "correct": 733,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen2.5-1.5B-Instruct": {
+  "acc": 0.5519332827899924,
+  "n": 1319,
+  "correct": 728,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
+ },
+ "Qwen/Qwen3-1.7B": {
+  "acc": 0.6611068991660348,
+  "n": 1319,
+  "correct": 872,
+  "harness": "5-shot greedy max256 first-5-train-exemplars"
  }
 }

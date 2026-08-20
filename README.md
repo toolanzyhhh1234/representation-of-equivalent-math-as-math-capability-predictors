@@ -4,7 +4,7 @@ Does the geometry of an LLM's internal representation of **mathematically equiva
 statements** predict its mathematical capability — and, more sharply, its robustness to
 equivalent reformulations?
 
-## Status: Phase 1 (specificity) complete. The metric is math-specific, not a general-quality meter.
+## Status: Phase 2 (20-model panel) complete. Replicates, attenuated — and a double dissociation.
 
 | document | contents |
 |---|---|
@@ -14,21 +14,22 @@ equivalent reformulations?
 | [`results/PHASE0.md`](results/PHASE0.md) | Phase 0: the lexical-null finding and the dissociation predictions |
 | [`results/PHASE05.md`](results/PHASE05.md) | Phase 0.5: dissociated 10-model panel, lexically-controlled metrics, in-house GSM8K, metric-selection verdict |
 | [`results/PHASE1_SPECIFICITY.md`](results/PHASE1_SPECIFICITY.md) | Phase 1: the specificity 2×2 — EQ_resid predicts math capability, its paraphrase mirror predicts nothing, the two are uncorrelated |
+| [`results/PHASE2_PANEL20.md`](results/PHASE2_PANEL20.md) | Phase 2: 20 models / 10 families — replication (+0.69), the representation/skill double dissociation, control tuning arms, protocol hardening |
 | [`RELATED_WORK.md`](RELATED_WORK.md) | prior work, mapped to the design decision each one justifies or threatens |
 
 ### Headline finding
 
-On a 10-model panel where size and capability decorrelate
-(`Spearman(GSM8K, log params) = +0.23`), equivalence representation tracks
-**capability, not size**:
-
-- `rho(EQ_resid, GSM8K in-house) = +0.818` (permutation p = 0.005);
-  `rho(EQ_resid, log params) = +0.250` (p = 0.49). Partials: +0.807 vs +0.109.
-- The Phase 0 **pre-registered point prediction resolved**: SmolLM2-1.7B
-  (Qwen2.5-0.5B's maths, Qwen2.5-1.5B's size) was predicted at EQ 0.770 if capability,
-  0.808 if size. Observed 0.748 held-out (CI [0.742, 0.796]) — size excluded.
-- TinyLlama-1.1B (1.1B params, GSM8K 2.4) lands at the null of every
-  lexically-controlled metric — a size-driven metric would have put it near 0.79.
+On 20 models across 10 families (0.36–2.5B), representation of mathematically
+equivalent statements tracks **math capability, not size, and not general
+representation quality** — `rho(EQ_resid, in-house GSM8K) = +0.687` (p = 0.001) vs
+`rho(size) = +0.33` (n.s.) and `rho(ARC-Easy) = +0.16` (n.s.) — **with a double
+dissociation that bounds the claim**: Pile/code-trained models (pythia-1.4b,
+deepseek-coder-1.3b) carry strong equivalence representation with ~zero math skill,
+while textbook/GSM-trained models (phi-1.5, OLMo-2-1B) show the reverse. EQ_resid is
+a *formal-math-representation* meter, coupled to skill only when the training recipe
+couples them. The Phase 0 pre-registered SmolLM2-1.7B point resolved for capability
+(size prediction excluded by the CI), and at fixed 1.54B: math tuning raises EQ_resid,
+coder tuning lowers it, in every variant.
 
 ![EQ vs GSM8K](results/eq_vs_gsm8k.png)
 
