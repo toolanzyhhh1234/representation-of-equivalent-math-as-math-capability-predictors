@@ -43,6 +43,15 @@ plus the pinned code here. Activations also cache locally to `results/raw/`
 
 ## Next steps (agreed order)
 
+**Latest user decision, 2026-09-22:** prioritize a direct test of whether better
+hidden-state geometry accompanies better independent reasoning performance, within
+or across models. See **[NEXT_STEPS.md](NEXT_STEPS.md)** for the next-container
+handoff. Geometry is primary; supervised probes are auxiliary. OOD probe degradation
+can reflect probe transfer failure, worse model task performance, or both, so it
+cannot establish geometric degradation alone. Define the metric and evaluation
+design next; no consequence-geometry metric or checkpoint family is selected yet.
+This priority supersedes the earlier roadmap below.
+
 **2026-09-22 handoff update:** H2 now has completed pilot/follow-up runs and pinned HF
 snapshots; see `ARCHIVES.md`, `H2_RUNNING.md`, and `results/H2_FOLLOWUP_READOUT.md`.
 The user then requested the logical-consequence investigation. That first pilot is

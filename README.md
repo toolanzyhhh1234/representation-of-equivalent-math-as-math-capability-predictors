@@ -6,6 +6,11 @@ equivalent reformulations?
 
 ## Status: Phase 3 complete — 23 models, 12 families, construct-matched DV. Necessity without sufficiency.
 
+**Next session (2026-09-22):** test whether better hidden-state geometry accompanies
+better independent reasoning performance, with trained probes as auxiliary
+diagnostics. See [NEXT_STEPS.md](NEXT_STEPS.md) for the agreed direction, unresolved
+metric choices, and handoff to a new container.
+
 | document | contents |
 |---|---|
 | [`REPORT.md`](REPORT.md) | **preliminary technical report** — the self-contained write-up of everything below |
