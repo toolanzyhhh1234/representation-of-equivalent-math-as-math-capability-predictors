@@ -1,0 +1,259 @@
+{
+  "description": "Follow-up candidates from GSM-Symbolic template IDs 20-39; wording derived from the corresponding pinned GSM8K originals, before evaluating these questions.",
+  "excluded_templates": {
+    "22": "Using three spoons does not explicitly remove them from a stated total of spoons; the gold assumes twelve unused spoons.",
+    "28": "Hospital occupancy after two weeks is underdetermined without assumptions about discharges and length of stay."
+  },
+  "excluded_instances": {
+    "26/2": "One month has no specified number of days; the gold assumes thirty. Replaced with the next ascending instance, 26/3, before inference."
+  },
+  "items": [
+    {
+      "template_id": 20,
+      "expression": "4+6+3*4",
+      "symbolic_expressions": [
+        "205+97+4*205",
+        "194+212+3*194",
+        "200+145+4*200"
+      ],
+      "paraphrases": [
+        "John picks 4 bananas on Wednesday and 6 on Thursday. His Friday banana picking is three times his Wednesday amount. How many bananas has he picked altogether?",
+        "How many bananas does John have after picking them on three days? He picks 4 on Wednesday, 6 on Thursday, and three times Wednesday's number on Friday."
+      ]
+    },
+    {
+      "template_id": 21,
+      "expression": "(7-1-1-1-30/60-2)/(30/60)",
+      "symbolic_expressions": [
+        "(23-4-4-6-15/60-2*4)/(45/60)",
+        "(19-4-4-4-45/60-2*3)/(15/60)",
+        "(23-6-6-3-30/60-2*2)/(30/60)"
+      ],
+      "paraphrases": [
+        "Frankie watches TV after his homework. On both Monday and Tuesday he watches one 1-hour episode. Wednesday's viewing consists of 30-minute episodes. Thursday's viewing is one 1-hour episode plus one 30-minute show, and Friday's is two 1-hour episodes. If all his viewing totals 7 hours, how many episodes does he watch on Wednesday?",
+        "How many 30-minute episodes did Frankie watch on Wednesday? His TV viewing for Monday through Friday totaled 7 hours after homework: one 1-hour episode on Monday, another on Tuesday, the Wednesday episodes, a 1-hour episode and a 30-minute show on Thursday, and two 1-hour episodes on Friday."
+      ]
+    },
+    {
+      "template_id": 23,
+      "expression": "3*(2+4+12+1+2)",
+      "symbolic_expressions": [
+        "2*(17+11+18+12+6)",
+        "2*(14+18+11+13+17)",
+        "4*(17+16+8+4+11)"
+      ],
+      "paraphrases": [
+        "Martha will knit a hat, scarf, sweater, pair of mittens, and pair of socks for each of her 3 grandchildren. The grandchildren are triplets of the same size. A hat needs 2 skeins of wool, a scarf 4, a sweater 12, a pair of mittens 1, and a pair of socks 2. How many skeins should she buy?",
+        "How many skeins of wool will Martha need for winter outfits for her 3 same-sized triplet grandchildren? For each child she plans a hat using 2 skeins, a scarf using 4, a sweater using 12, a pair of mittens using 1, and a pair of socks using 2."
+      ]
+    },
+    {
+      "template_id": 24,
+      "expression": "(2000-1800)/250*(300/5)",
+      "symbolic_expressions": [
+        "(2395-1350)/475*(275/5)",
+        "(1905-1725)/450*(100/5)",
+        "(1925-1025)/300*(300/4)"
+      ],
+      "paraphrases": [
+        "A 300-gram bag of chips contains 5 servings, with 250 calories in each serving. Your daily calorie target is 2000, and you have consumed 1800 so far. How many grams of these chips can you eat within the remaining allowance?",
+        "How many grams of chips fit your remaining calorie allowance after consuming 1800 calories toward a 2000-calorie daily target? The chips provide 250 calories per serving, and their 300g bag holds 5 servings."
+      ]
+    },
+    {
+      "template_id": 25,
+      "expression": "30*20/100+(30-30*20/100)*25/100",
+      "symbolic_expressions": [
+        "35*20/100+(35-35*20/100)*25/100",
+        "125*40/100+(125-125*40/100)*32/100",
+        "125*36/100+(125-125*36/100)*40/100"
+      ],
+      "paraphrases": [
+        "Mr. Roper has 30 students in his class. Football players make up 20% of the class. Among the students who are not football players, 25% are cheerleaders or band members. The football players, cheerleaders, and band members leave early for an away game. How many students leave early?",
+        "How many students will leave Mr. Roper's class early for the away game? Of his 30 students, 20% play football. Of the remaining students, 25% belong to cheerleading or band. All students in those three groups are leaving early."
+      ]
+    },
+    {
+      "template_id": 26,
+      "expression": "(5+4+2)*7",
+      "symbolic_instances": [
+        0,
+        1,
+        3
+      ],
+      "symbolic_expressions": [
+        "(6+3+6)*7",
+        "(7+5+4)*7",
+        "(5+3+8)*7"
+      ],
+      "paraphrases": [
+        "Each day, a man eats 5 sandwiches, his wife eats 4, and their son eats 2. How many sandwiches do they eat together over one week?",
+        "How many sandwiches does a family eat in a week if the man's daily amount is 5, his wife's is 4, and their son's is 2?"
+      ]
+    },
+    {
+      "template_id": 27,
+      "expression": "80*(1-20/100)*5",
+      "symbolic_expressions": [
+        "150*(1-32/100)*6",
+        "100*(1-16/100)*4",
+        "120*(1-20/100)*3"
+      ],
+      "paraphrases": [
+        "James receives 80 emails each day. He responds to all except the 20% that do not need a response. How many emails does he respond to during a 5-day workweek?",
+        "How many emails does James answer over 5 working days? Every day he gets 80 emails, of which 20% need no reply, and he responds to all the others."
+      ]
+    },
+    {
+      "template_id": 29,
+      "expression": "14*3-4",
+      "symbolic_expressions": [
+        "13*3-3",
+        "24*3-6",
+        "10*3-7"
+      ],
+      "paraphrases": [
+        "Brett is currently 14. Four years from now, his sister Angela's age will be three times Brett's current age. How old is Angela today?",
+        "What is Angela's current age if, in four years, she will be three times as old as her brother Brett is today? Brett is 14 years old now."
+      ]
+    },
+    {
+      "template_id": 30,
+      "expression": "12.48-16*0.03",
+      "symbolic_expressions": [
+        "102.5-25*0.98",
+        "82.3-22*0.65",
+        "74.22-17*0.66"
+      ],
+      "paraphrases": [
+        "David takes $12.48 to the hardware store and buys 16 bolts from a bin, paying $0.03 per bolt. How much of his money is left?",
+        "How much money remains from David's $12.48 after he buys 16 bolts at the hardware store for $0.03 each?"
+      ]
+    },
+    {
+      "template_id": 31,
+      "expression": "(40+40+16)/2",
+      "symbolic_expressions": [
+        "(35+35+10)/2",
+        "(15+15+16)/2",
+        "(62+62+12)/2"
+      ],
+      "paraphrases": [
+        "Mia is 40 years old and is 16 years younger than Emma. What is the average of their current ages?",
+        "What is the mean age of Mia and Emma if their ages differ by 16 years and the younger one, Mia, is 40?"
+      ]
+    },
+    {
+      "template_id": 32,
+      "expression": "350000*(1+5/100+12/100)-400000",
+      "symbolic_expressions": [
+        "340000*(1+3/100+10/100)-360000",
+        "300000*(1+6/100+12/100)-330000",
+        "300000*(1+7/100+11/100)-340000"
+      ],
+      "paraphrases": [
+        "Mrs. Cruz's house-buying budget is $400,000. A property sells for $350,000, and its buyer must additionally pay a brokerage fee of 5% of that selling price and a transfer fee of 12% of that selling price. By how much does the full cost exceed her budget?",
+        "How much over her $400,000 budget would Mrs. Cruz go by buying a $350,000 house with two additional fees: brokerage at 5% of the selling price and transfer at 12% of the selling price?"
+      ]
+    },
+    {
+      "template_id": 33,
+      "expression": "100-20-44",
+      "symbolic_expressions": [
+        "120-35-30",
+        "140-22-43",
+        "95-30-31"
+      ],
+      "paraphrases": [
+        "Sisters Carol and Jennifer from Los Angeles collect celebrity signatures every afternoon of summer vacation. After five weeks, Carol has 20 signatures and Jennifer has 44. With three weeks of vacation left, they want 100 signatures between them by summer's end. How many additional signatures do they need?",
+        "How many more celebrity signatures do Carol and Jennifer need to reach a combined total of 100? The Los Angeles sisters have collected signatures every afternoon for five weeks of summer break, accumulating 20 for Carol and 44 for Jennifer, and they have three weeks of vacation remaining."
+      ]
+    },
+    {
+      "template_id": 34,
+      "expression": "400000*(1-3/100-5/100)-250000",
+      "symbolic_expressions": [
+        "880000*(1-3/100-5/100)-440000",
+        "880000*(1-3/100-4/100)-270000",
+        "930000*(1-3/100-3/100)-310000"
+      ],
+      "paraphrases": [
+        "Mr. Tan sells his house for $400,000. From that amount he pays a transfer fee equal to 3% of the selling price, a brokerage fee equal to 5% of the selling price, and the remaining $250,000 mortgage loan. What are his net proceeds?",
+        "How much does Mr. Tan keep from selling his house for $400,000 after paying off a $250,000 remaining loan and paying transfer and brokerage fees of 3% and 5% of the selling price, respectively?"
+      ]
+    },
+    {
+      "template_id": 35,
+      "expression": "300-300/2-50",
+      "symbolic_expressions": [
+        "210-210/5-30",
+        "590-590/2-115",
+        "980-980/2-195"
+      ],
+      "paraphrases": [
+        "John's school trip costs $300. His school agrees to pay half the cost, and John already has $50. How much more money does John need for the trip?",
+        "How much money is John still short for a $300 school trip if the school will cover half the cost and he has $50 himself?"
+      ]
+    },
+    {
+      "template_id": 36,
+      "expression": "3*68+2*80+6*55",
+      "symbolic_expressions": [
+        "1*17+8*74+3*113",
+        "1*15+5*83+3*116",
+        "3*12+8*82+6*113"
+      ],
+      "paraphrases": [
+        "At a bakery, Toula buys 3 dozen donuts priced at $68 per dozen, 2 dozen mini cupcakes priced at $80 per dozen, and 6 dozen mini cheesecakes priced at $55 per dozen. How much does she pay in total?",
+        "What is Toula's total bakery bill for 3 dozen donuts at $68 a dozen, 2 dozen mini cupcakes at $80 a dozen, and 6 dozen mini cheesecakes at $55 a dozen?"
+      ]
+    },
+    {
+      "template_id": 37,
+      "expression": "24/(2+2*2)",
+      "symbolic_expressions": [
+        "30/(5+5*5)",
+        "30/(2+2*2)",
+        "48/(4+4*2)"
+      ],
+      "paraphrases": [
+        "A loaf contains 24 slices of bread. Abby can eat 2 slices per day, and Josh can eat twice that daily amount. How many days will the loaf last them?",
+        "For how many days will a 24-slice loaf of bread last if Abby can eat 2 slices daily and Josh can eat twice as many each day?"
+      ]
+    },
+    {
+      "template_id": 38,
+      "expression": "3*2-2*1",
+      "symbolic_expressions": [
+        "6*8-4*4",
+        "5*8-3*2",
+        "3*4-6*1"
+      ],
+      "paraphrases": [
+        "The bakery sells bread for $2 a loaf and bagels for $1 each. What is the difference between the cost of 3 loaves and the cost of 2 bagels?",
+        "How much does the price of 3 loaves of bread exceed the price of 2 bagels when each loaf costs $2 and each bagel costs $1?"
+      ]
+    },
+    {
+      "template_id": 39,
+      "expression": "80*15/5/(8*60)*100",
+      "symbolic_expressions": [
+        "210*20/10/(10*60)*100",
+        "120*20/10/(8*60)*100",
+        "60*15/5/(15*60)*100"
+      ],
+      "paraphrases": [
+        "A custodian must clean 80 classrooms in 5 days, taking 15 minutes for each classroom. With an 8-hour workday, what percentage of the day on average is devoted to classroom cleaning?",
+        "On average, what percent of an 8-hour workday will a custodian spend cleaning classrooms if 80 classrooms must be cleaned in 5 days and each takes 15 minutes?"
+      ]
+    }
+  ],
+  "development_overrides": {
+    "19": {
+      "paraphrases": [
+        "A quiz contains 60 questions, with 40% easy and the remaining questions split equally between average and difficult. Aries is certain to answer 75% of the easy questions correctly and half of the average and difficult questions correctly. How many points is she certain to score?",
+        "How many points can Aries be sure of on a 60-question quiz? Easy questions account for 40% of it, and the rest are equally divided into average and difficult questions. She is sure to get 75% of the easy questions, and half of the average and difficult questions correctly."
+      ]
+    }
+  }
+}

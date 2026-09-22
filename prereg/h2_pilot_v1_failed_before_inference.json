@@ -1,0 +1,94 @@
+{
+  "schema": 1,
+  "stage": "feasibility pilot, not confirmatory H2 test",
+  "models": {
+    "HuggingFaceTB/SmolLM2-360M": "f8027fd0eaeea54caa13c31d31b9fdc459c38b49",
+    "Qwen/Qwen2.5-0.5B": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "microsoft/phi-1_5": "77aa61eeac94fbf33d492b9f2744c98b42d5b5eb"
+  },
+  "settings": {
+    "samples": 8,
+    "batch_size": 32,
+    "seed": 20260922,
+    "n_shot": 5,
+    "max_new_tokens": 256,
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "top_k": 0
+  },
+  "stimuli_sha256": "6f0d697ed18e24de4f3b201e8c0737b794aea6957ab02686a098f1eba4e5cdbb",
+  "template_ids": [
+    0,
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    17,
+    18,
+    19
+  ],
+  "shots": [
+    {
+      "question": "Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?",
+      "answer": "Natalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\n#### 72"
+    },
+    {
+      "question": "Weng earns $12 an hour for babysitting. Yesterday, she just did 50 minutes of babysitting. How much did she earn?",
+      "answer": "Weng earns 12/60 = $<<12/60=0.2>>0.2 per minute.\nWorking 50 minutes, she earned 0.2 x 50 = $<<0.2*50=10>>10.\n#### 10"
+    },
+    {
+      "question": "Betty is saving money for a new wallet which costs $100. Betty has only half of the money she needs. Her parents decided to give her $15 for that purpose, and her grandparents twice as much as her parents. How much more money does Betty need to buy the wallet?",
+      "answer": "In the beginning, Betty has only 100 / 2 = $<<100/2=50>>50.\nBetty's grandparents gave her 15 * 2 = $<<15*2=30>>30.\nThis means, Betty needs 100 - 50 - 30 - 15 = $<<100-50-30-15=5>>5 more.\n#### 5"
+    },
+    {
+      "question": "Julie is reading a 120-page book. Yesterday, she was able to read 12 pages and today, she read twice as many pages as yesterday. If she wants to read half of the remaining pages tomorrow, how many pages should she read?",
+      "answer": "Maila read 12 x 2 = <<12*2=24>>24 pages today.\nSo she was able to read a total of 12 + 24 = <<12+24=36>>36 pages since yesterday.\nThere are 120 - 36 = <<120-36=84>>84 pages left to be read.\nSince she wants to read half of the remaining pages tomorrow, then she should read 84/2 = <<84/2=42>>42 pages.\n#### 42"
+    },
+    {
+      "question": "James writes a 3-page letter to 2 different friends twice a week.  How many pages does he write a year?",
+      "answer": "He writes each friend 3*2=<<3*2=6>>6 pages a week\nSo he writes 6*2=<<6*2=12>>12 pages every week\nThat means he writes 12*52=<<12*52=624>>624 pages a year\n#### 624"
+    }
+  ],
+  "eq_resid": {
+    "HuggingFaceTB/SmolLM2-360M": 0.683273596176822,
+    "Qwen/Qwen2.5-0.5B": 0.7322341696535244,
+    "microsoft/phi-1_5": 0.6028355236957387
+  },
+  "panel_sha256": "910a28b58187b45de7e3c99d932f152742444a483280bb525c4b4ec13056bc91",
+  "code_sha256": {
+    "src/run_h2.py": "c6eb53413376a0edc8597c6cff79ee249afe046bee0fdf86bfabce6122da273a",
+    "src/h2_data.py": "23bb7d8105ba52098cb51cb3da97762067039caa13e6b8abbae9ce1de54f7615",
+    "src/h2_metrics.py": "6fcc1872ec2c6dd7114708f3a78f79ca1797ba228420f7f58c93b4ec418ed7e5",
+    "src/eval_gsm8k.py": "f8d673edda4e57aaadd7870712fc4d112fb43c9b3b721816bb27c474ebd6b134",
+    "src/hf_data.py": "3f1c07c628dedda8e98625a3b3c45e4dcef13bcd756e46e39122f0dd7376454a",
+    "src/config.py": "2c34d03c8ee30b86ce170b2f6ba06fe6e9a476cbdc02e44cc441561108ae3f04",
+    "data/hf_sources.json": "6c44ebd104b0d1f417e92dbf7c05df78542ea78a038d42eb8d4a9e2ab89df018",
+    "data/h2_rewrites.json": "28e8f4a4008f6e620858663507ce04119a8350db78c6b678ececef7e8f662d7f",
+    "pyproject.toml": "d7b37987a65dbcea3aa0ca51e3ab108a9ab5da6362236cfce4597440e5682dc7",
+    "uv.lock": "c063574dc42bd4f2eee4f3c625116006801774809f6740a4a51fdb1c1cf2d3c6",
+    "prereg/H2_PILOT.md": "797a3e1c703ed009be921bebb29747799643d4af34a18aabf2fc145a95a2fac0"
+  },
+  "environment": {
+    "packages": {
+      "torch": "2.11.0+cu128",
+      "transformers": "5.15.1",
+      "numpy": "2.5.3",
+      "datasets": "5.0.1",
+      "huggingface-hub": "1.32.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "cuda": "12.8"
+  },
+  "sha256": "b120baba7522df9396ecc9242295f83a3b74a8fd5d5fe583f91b107e9e195f1a",
+  "created_utc": "2026-09-22T07:14:37.136193+00:00"
+}

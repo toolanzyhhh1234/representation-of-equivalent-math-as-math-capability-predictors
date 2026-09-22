@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc
 .venv/
-results/raw/
+results/raw
 *.npy
 *.npz
 .ipynb_checkpoints/
@@ -10,4 +10,12 @@ results/raw/
 # (signed query parameters and account ids) from download retry warnings.
 results/*.log
 results/*.bak*
-results/raw_outputs/
+results/raw_outputs
+
+# Downloaded datasets, archive, and local verification reports.
+data/hf/
+data/h2/
+results/h2/
+results/setup/
+.env
+.env.*

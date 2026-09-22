@@ -1,0 +1,35 @@
+{
+  "reviewer_type": "independent_agent",
+  "approved_for_exploratory_run": true,
+  "packet_sha256": "2905dd5e626f73e3870cd822cb540cd7620759a4fe667143d361e5c0b4a866a1",
+  "first_pass_report": "prereg/h2_followup_review_independent.json",
+  "final_report": "prereg/h2_followup_review_independent_final.json",
+  "review_report_sha256": "3bf02aa5ca47ea98c90457f847827f2aa6545af596472a0fd314fe70ad6e9d60",
+  "counts": {
+    "template_verdicts": {
+      "pass": 36,
+      "revise": 0,
+      "exclude": 0,
+      "needs_human": 0
+    },
+    "variant_verdicts": {
+      "pass": 72,
+      "revise": 0,
+      "exclude": 0,
+      "needs_human": 0
+    }
+  },
+  "author_adjudication": "Both required revisions accepted and independently re-reviewed before follow-up inference. Ordinary shared source assumptions and simplification caveats remain. This is not human certification or a formal proof.",
+  "corrections": [
+    {
+      "template_id": 19,
+      "variant": "query_first",
+      "change": "Removed half-of-each strengthening; preserved source collective wording. Development override only; pilot unchanged."
+    },
+    {
+      "template_id": 27,
+      "variant": "paraphrase",
+      "change": "Asked for incoming emails responded to instead of outgoing replies sent."
+    }
+  ]
+}

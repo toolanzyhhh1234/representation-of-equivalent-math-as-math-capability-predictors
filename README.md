@@ -16,6 +16,10 @@ equivalent reformulations?
 | [`results/PHASE1_SPECIFICITY.md`](results/PHASE1_SPECIFICITY.md) | Phase 1: the specificity 2×2 — EQ_resid predicts math capability, its paraphrase mirror predicts nothing, the two are uncorrelated |
 | [`results/PHASE2_PANEL20.md`](results/PHASE2_PANEL20.md) | Phase 2: 20 models / 10 families — replication (+0.69), the representation/skill double dissociation, control tuning arms, protocol hardening |
 | [`results/PHASE3_MATH500.md`](results/PHASE3_MATH500.md) | Phase 3: 23 models / 12 families — MATH-500 resolves the dissociation; necessity-without-sufficiency wedge |
+| [`results/PHASE4_H2_PILOT.md`](results/PHASE4_H2_PILOT.md) | H2 feasibility pilot: 18 problems, 3 models, 2,592 generations; same-answer rewrites and GSM-Symbolic reported separately |
+| [`results/PHASE4_H2_AUDIT.md`](results/PHASE4_H2_AUDIT.md) | First-pilot sampling/termination audit and independent semantic-review corrections |
+| [`results/PHASE4_H2_FOLLOWUP.md`](results/PHASE4_H2_FOLLOWUP.md) | Blind-reviewed follow-up: 36 problems, 5 models, 21,600 fresh responses; strict arm primary, holdouts separate |
+| [`results/H2_FOLLOWUP_READOUT.md`](results/H2_FOLLOWUP_READOUT.md) | Interpretation: no clear positive H2 signal; accuracy gain without a clear matched-size invariance gain |
 | [`RELATED_WORK.md`](RELATED_WORK.md) | prior work, mapped to the design decision each one justifies or threatens |
 
 ### Headline finding
@@ -51,8 +55,14 @@ metric variant (Qwen2.5 and Qwen2 pairs; the effect *grows* under lexical contro
 ### What is still open
 
 H2 — that equivalence representation predicts robustness to equivalent reformulations
-better than raw accuracy — is untested: the rewrite-invariance arm has not run, and
-the necessity wedge gives it two-sided advance predictions. H3 (causal ablation of the
+better than raw accuracy — now has a [three-model feasibility pilot](results/PHASE4_H2_PILOT.md)
+and a [blind-reviewed five-model follow-up](results/PHASE4_H2_FOLLOWUP.md), but the
+full-panel test remains open. The follow-up does not show a clear positive H2 signal:
+Phi's initial rewrite penalty did not generalize to new problems, and math tuning
+improved accuracy without a clear invariance gain on common eligible problems.
+See the [readout and limitations](results/H2_FOLLOWUP_READOUT.md).
+See [H2_RUNNING.md](H2_RUNNING.md) for the frozen protocol and resumable runner.
+H3 (causal ablation of the
 equivalence subspace) has not started. H1-style claims remain correlational; the
 lexical control is statistical (EQ_resid is a lower bound) with `eq_hard` as the
 by-construction audit, and purpose-built topic-matched negatives are still the
@@ -60,6 +70,10 @@ stronger fix. The necessity threshold (0.65) is descriptive on 23 points, not a 
 boundary.
 
 ## Running it
+
+Start with [SETUP.md](SETUP.md) for the locked Python/CUDA environment, Hugging Face
+login, pinned data downloads, and verification commands. The proposed extension to
+logical premises and consequences is in [LOGIC_EXTENSION.md](LOGIC_EXTENSION.md).
 
 ```bash
 python -m tests.test_extract      # padding-invariance guard

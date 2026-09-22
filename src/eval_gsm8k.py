@@ -19,9 +19,9 @@ import sys
 import time
 
 import torch
-from datasets import load_dataset
 
 from .config import PANEL, RESULTS
+from .hf_data import load_benchmark
 
 MAX_NEW = 256
 BATCH = 64
@@ -102,7 +102,7 @@ def main():
     for a in sys.argv[1:]:
         if a.startswith("--limit"):
             limit = int(a.split("=")[1]) if "=" in a else None
-    ds = load_dataset("openai/gsm8k", "main")
+    ds = load_benchmark("gsm8k")
     shots = [ds["train"][i] for i in range(N_SHOT)]
     test = ds["test"] if limit is None else ds["test"].select(range(limit))
     prompts = [build_prompt(shots, ex["question"]) for ex in test]

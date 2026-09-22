@@ -21,9 +21,9 @@ import sys
 import time
 
 import torch
-from datasets import load_dataset
 
 from .config import PANEL, RESULTS
+from .hf_data import load_benchmark
 
 MAX_NEW = 512
 BATCH = 32
@@ -109,7 +109,7 @@ def eval_model(model_id, prompts, golds, problems):
 
 
 def main():
-    ds = load_dataset("HuggingFaceH4/MATH-500")["test"]
+    ds = load_benchmark("math500")["test"]
     shots = "\n\n".join(f"Problem: {ds[i]['problem']}\nSolution: {ds[i]['solution']}"
                         for i in range(N_SHOT))
     prompts = [f"{shots}\n\nProblem: {ex['problem']}\nSolution:"

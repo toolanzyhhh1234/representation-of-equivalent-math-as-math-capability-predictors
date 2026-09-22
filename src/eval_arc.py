@@ -13,9 +13,9 @@ import time
 
 import numpy as np
 import torch
-from datasets import load_dataset
 
 from .config import PANEL, RESULTS
+from .hf_data import load_benchmark
 
 BATCH = 64
 
@@ -79,7 +79,7 @@ def eval_model(model_id, examples):
 
 
 def main():
-    ds = load_dataset("allenai/ai2_arc", "ARC-Easy")["test"]
+    ds = load_benchmark("arc_easy")["test"]
     examples = [ex for ex in ds if ex["answerKey"] in ex["choices"]["label"]]
     print(f"ARC-Easy test n={len(examples)}", flush=True)
     path = RESULTS / "arc_easy.json"

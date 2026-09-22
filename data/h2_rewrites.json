@@ -1,0 +1,171 @@
+{
+  "description": "AI-authored paraphrases of GSM8K originals identified by GSM-Symbolic template ID. Arithmetic checked independently; natural-language equivalence reviewed, not formally proved.",
+  "excluded_templates": {
+    "2": "More likely expressed as a percentage is ambiguous between percentage-point and relative differences.",
+    "16": "The Saturday/Sunday sales comparison has an ambiguous attachment; paraphrasing could disambiguate the original."
+  },
+  "items": [
+    {
+      "template_id": 0,
+      "expression": "2*6/12/10*100",
+      "symbolic_expressions": ["7*72/12/210*100", "8*3/12/10*100", "8*57/12/380*100"],
+      "paraphrases": [
+        "Benny observed a shark whose body was 10 feet long. Attached to it were 2 remoras, each measuring 6 inches. The remoras' lengths added together amount to what percentage of the shark's body length?",
+        "What percent of a 10-foot shark's length would be covered by the combined lengths of 2 remoras that are each 6 inches long? Benny saw these remoras attached to the shark."
+      ]
+    },
+    {
+      "template_id": 1,
+      "expression": "42/3*10",
+      "symbolic_expressions": ["77/77*50", "70/35*176", "39/13*63"],
+      "paraphrases": [
+        "Fog moves from the ocean across a city at a rate of 3 miles every 10 minutes. The distance from the city's oceanfront to its inland edge is 42 miles. How many minutes does the fog need to cover that distance?",
+        "How long, in minutes, will fog take to spread across an entire city 42 miles wide? It enters at the oceanfront, travels toward the opposite inland edge, and covers 3 miles in each 10-minute interval."
+      ]
+    },
+    {
+      "template_id": 3,
+      "expression": "50-10-5-2*5",
+      "symbolic_expressions": ["190-19-7-2*7", "54-35-2-2*2", "157-23-41-2*41"],
+      "paraphrases": [
+        "In a class with 50 students, 10 prefer baking and 5 prefer basketball. The remaining students prefer either video games or music. There are twice as many music fans as basketball fans. How many students prefer video games?",
+        "How many students in a class of 50 like video games? Of the class, 10 like baking and 5 like basketball; the others like video games or music. The number who like music is twice the number who like basketball."
+      ]
+    },
+    {
+      "template_id": 4,
+      "expression": "20+3*20+4*20+4*20/2+(4*20/2)/4",
+      "symbolic_expressions": ["60+4*60+6*60+6*60/2+(6*60/2)/4", "20+3*20+4*20+4*20/2+(4*20/2)/4", "30+3*30+4*30+4*30/2+(4*30/2)/4"],
+      "paraphrases": [
+        "Garrett heats popcorn for four consecutive 30-second periods. In the first period, 20 kernels pop. In the second, three times the first period's number pop. In the third, four times the first period's number pop. In the fourth, half as many pop as in the third. Once the pan is off the heat, additional kernels pop numbering a quarter of those from the fourth period. How many popped kernels does Garrett have altogether?",
+        "How many pieces of popcorn does Garrett get in total? He starts with 20 kernels popping during 30 seconds of heating. Over the next 30 seconds, three times that initial number pop; over the following 30 seconds, four times the initial number pop. The final 30 seconds produce half the preceding period's number. After heating ends, residual heat pops another quarter as many as popped during the final period."
+      ]
+    },
+    {
+      "template_id": 5,
+      "expression": "120*7/(7+13)",
+      "symbolic_expressions": ["1474*97/(97+37)", "726*164/(164+78)", "468*135/(135+21)"],
+      "paraphrases": [
+        "Katy's coffee recipe has 7 teaspoons of sugar for every 13 cups of water. The number of teaspoons of sugar plus the number of cups of water she uses is 120. How many teaspoons of sugar does she use?",
+        "How many teaspoonfuls of sugar went into Katy's coffee if the sugar-teaspoon count and water-cup count together equal 120? Their ratio, sugar teaspoons to water cups, is 7 to 13."
+      ]
+    },
+    {
+      "template_id": 6,
+      "expression": "10*100*12/3",
+      "symbolic_expressions": ["30*94*12/12", "75*77*12/12", "90*99*12/4"],
+      "paraphrases": [
+        "John grows pineapples on 10 hectares. Each hectare produces 100 pineapples per harvest, and he harvests every 3 months. How many pineapples can he harvest over a year?",
+        "What is John's yearly pineapple harvest if his 10-hectare field yields 100 pineapples per hectare and can be harvested once every 3 months?"
+      ]
+    },
+    {
+      "template_id": 7,
+      "expression": "(2*1+4*12+42*75+20*65)/2250",
+      "symbolic_expressions": ["(5*3+13*6+31*42+15*15)/180", "(4*4+12*8+32*37+19*16)/200", "(4*6+15*8+32*43+20*19)/190"],
+      "paraphrases": [
+        "A farmer must transport feed for his horses: two boxes of sugar cubes weighing 1 pound each, four bags of carrots weighing 12 pounds each, forty-two hay bales weighing 75 pounds each, and twenty sacks of oats weighing 65 pounds each. His truck holds at most 2250 pounds per load. How many trips are needed to carry all the feed?",
+        "How many truckloads does a farmer need for his horses' feed when the truck carries 2250 pounds per trip? He has purchased 2 one-pound boxes of sugar cubes, 4 twelve-pound bags of carrots, 42 seventy-five-pound bales of hay, and 20 sixty-five-pound sacks of oats."
+      ]
+    },
+    {
+      "template_id": 8,
+      "expression": "16/2/2",
+      "symbolic_expressions": ["640/8/10", "420/2/3", "120/5/4"],
+      "paraphrases": [
+        "Of the 16 balls a juggler juggles, half are golf balls. Half of those golf balls are blue. How many of the balls are blue golf balls?",
+        "How many blue golf balls does a juggler have among 16 balls, if golf balls make up half of the balls and blue balls make up half of the golf balls?"
+      ]
+    },
+    {
+      "template_id": 9,
+      "expression": "62-31-8-9",
+      "symbolic_expressions": ["204-71-45-29", "189-74-42-32", "215-74-37-30"],
+      "paraphrases": [
+        "Sophie has 31 building blocks, 8 stuffed animals and 9 stacking rings for her nephew. She adds a tube of bouncy balls, after which the toy count is 62. How many balls were in the tube?",
+        "How many bouncy balls did Sophie buy for her nephew? Before buying the tube she had 31 blocks, 8 stuffed animals, and 9 rings. Including the new balls, she now has 62 toys."
+      ]
+    },
+    {
+      "template_id": 10,
+      "expression": "16*0.25+(36-16)*0.2",
+      "symbolic_expressions": ["20*0.9+(86-20)*0.5", "15*0.6+(51-15)*0.5", "30*0.8+(55-30)*0.4"],
+      "paraphrases": [
+        "A payphone charges $0.25 a minute for the first 16 minutes of a call, then $0.2 a minute for the remaining time. What is the charge for a call lasting 36 minutes?",
+        "What would you pay for 36 minutes on a payphone whose per-minute price starts at $0.25 and falls to $0.2 after the first 16 minutes?"
+      ]
+    },
+    {
+      "template_id": 11,
+      "expression": "32-3*4-7*2-8/2",
+      "symbolic_expressions": ["328-8*12-15/5-13*11", "334-8*12-24*2/4-12*11", "348-8*12-24*3/4-14*11"],
+      "paraphrases": [
+        "Peter starts with 32 ounces of water for ice cubes. A giant cube needs 4 ounces, a medium cube needs 2 ounces, and a small cube needs half an ounce. He makes 3 giant, 7 medium, and 8 small cubes. How many ounces remain unused?",
+        "How much of Peter's 32 ounces of water is left after he makes 3 giant ice cubes, 7 medium ones, and 8 small ones? The amounts per cube are 4 ounces for giant, 2 ounces for medium, and 1/2 ounce for small."
+      ]
+    },
+    {
+      "template_id": 12,
+      "expression": "64-2*24",
+      "symbolic_expressions": ["252-7*28", "321-12*26", "291-13*21"],
+      "paraphrases": [
+        "Jaime has 64 eggs to put into 2 trays. A tray holds 24 eggs. How many eggs will be left without a space in either tray?",
+        "How many of Jaime's 64 eggs will not fit if he fills 2 trays, each with room for 24 eggs?"
+      ]
+    },
+    {
+      "template_id": 13,
+      "expression": "40*2+18-40*1",
+      "symbolic_expressions": ["52*7+29-52*6", "58*11+23-58*3", "62*11+34-62*3"],
+      "paraphrases": [
+        "Mary has 2 potted plants on each of 40 window ledges. Yesterday a nursery sent her 18 additional potted plants. Tomorrow she will give friends and family 1 plant from every ledge. How many plants will she have afterward?",
+        "After giving away 1 plant from each of her 40 window ledges, how many potted plants will Mary keep? She initially had 2 on every ledge and received another 18 plants from a nursery yesterday. The giveaway is tomorrow."
+      ]
+    },
+    {
+      "template_id": 14,
+      "expression": "30-6-13",
+      "symbolic_expressions": ["109-27-31", "107-19-21", "102-14-53"],
+      "paraphrases": [
+        "John and Jack set out with 30 minutes available to reach school. They spend 6 minutes walking to the library corner and then 13 more minutes reaching the fire station. How many minutes do they still have to reach school on time?",
+        "How much of John and Jack's 30-minute allowance for walking to school remains after a 6-minute walk to the library corner followed by a 13-minute walk to the fire station?"
+      ]
+    },
+    {
+      "template_id": 15,
+      "expression": "(3+4)/(8+12)*100",
+      "symbolic_expressions": ["(270+140)/(1000+640)*100", "(230+150)/(1000+520)*100", "(250+120)/(1035+445)*100"],
+      "paraphrases": [
+        "There are 8 puppies in Jennifer's dog's litter, including 3 spotted puppies. Brandon's dog has 12 puppies, including 4 with spots. What percent of the puppies in both litters are spotted?",
+        "Among all the puppies belonging to Jennifer's dog and Brandon's dog, what percentage have spots? Jennifer's dog has 8 puppies with 3 spotted, while Brandon's has 12 with 4 spotted."
+      ]
+    },
+    {
+      "template_id": 17,
+      "expression": "40+1/(2*(2/40))",
+      "symbolic_expressions": ["60+12/(2*(12/60))", "64+12/(3*(16/64))", "60+16/(4*(10/60))"],
+      "paraphrases": [
+        "Grandma's daily 3-mile walk consists of 2 miles on a beach and 1 mile on a sidewalk. Her sidewalk speed is twice her beach speed, and she spends 40 minutes on the beach portion. How many minutes does the complete walk take?",
+        "What is the total time in minutes for Grandma to walk her 3-mile route? The 2-mile beach segment takes 40 minutes. The other mile is on a sidewalk, where she walks twice as fast as on the beach."
+      ]
+    },
+    {
+      "template_id": 18,
+      "expression": "4*1.5+2*4+20",
+      "symbolic_expressions": ["22*4.5+8*14+22", "18*5.5+8*16.25+24", "16*5.75+10*18.5+21"],
+      "paraphrases": [
+        "Raphael buys 4 pens at $1.5 apiece, 2 notebooks at $4 apiece, and bond paper costing $20. What is the total cost of his school supplies?",
+        "How much does Raphael pay altogether for school supplies consisting of 4 pens priced at $1.5 each, 2 notebooks priced at $4 each, and a package of bond paper priced at $20?"
+      ]
+    },
+    {
+      "template_id": 19,
+      "expression": "60*40/100*75/100+60*(1-40/100)/2",
+      "symbolic_expressions": ["150*60/100*40/100+150*(1-60/100)/10", "40*25/100*30/100+40*(1-25/100)/10", "110*40/100*25/100+110*(1-40/100)/6"],
+      "paraphrases": [
+        "A quiz contains 60 questions, with 40% easy and the remaining questions split equally between average and difficult. Aries is certain to answer 75% of the easy questions correctly and half of the average and difficult questions correctly. How many points is she certain to score?",
+        "How many points can Aries be sure of on a 60-question quiz? Easy questions account for 40% of it, and the rest are equally divided into average and difficult questions. She is sure of getting 75% of the easy questions right and half of each of the other two categories right."
+      ]
+    }
+  ]
+}

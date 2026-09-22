@@ -49,8 +49,8 @@ VARIANTS = ("para", "para_resid")
 
 def build_paws():
     """Balanced pair sample from the human-verified splits. Deterministic."""
-    from datasets import load_dataset
-    ds = load_dataset("google-research-datasets/paws", "labeled_final")
+    from .hf_data import load_benchmark
+    ds = load_benchmark("paws")
     rows = list(ds["test"]) + list(ds["validation"])
     rng = np.random.default_rng(SEED)
     by_label = {0: [], 1: []}

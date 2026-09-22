@@ -1,0 +1,734 @@
+{
+  "reviewer_type": "independent_agent",
+  "review_status": "completed_independent_AI_review_not_human_certification",
+  "packet_path": "/root/representation-of-equivalent-math-as-math-capability-predictors/data/h2/followup_review_packet_first_pass.json",
+  "packet_sha256": "bb377b45591c4f355ddf33819fe03776ec322968d48a240b7b626693bcc17bb7",
+  "scope": {
+    "templates": 36,
+    "comparisons": 72,
+    "read_sources": [
+      "data/h2/followup_review_packet_first_pass.json (originally read at data/h2/followup_review_packet.json)"
+    ],
+    "blindness": "No scores, results, study hypotheses, earlier reviews, author reasoning, protocol documents, or gold/program solutions were read. Relations and arithmetic were independently derived from the supplied question texts."
+  },
+  "verdict_definitions": {
+    "pass": "Preserves mathematical question under ordinary conventions shared with the source; caveats are recorded.",
+    "revise": "Change wording to avoid a new constraint, resolving source ambiguity, or changing the requested object.",
+    "exclude": "No defensible equivalence comparison.",
+    "needs_human": "Material unresolved semantic question requires human adjudication."
+  },
+  "counts": {
+    "template_verdicts": {
+      "pass": 34,
+      "revise": 2,
+      "exclude": 0,
+      "needs_human": 0
+    },
+    "variant_verdicts": {
+      "pass": 70,
+      "revise": 2,
+      "exclude": 0,
+      "needs_human": 0
+    }
+  },
+  "findings": [
+    {
+      "template_id": 0,
+      "verdict": "pass",
+      "independent_mathematical_relation": "100*(2*6)/(10*12)=10",
+      "derived_result": "10%",
+      "source_assumptions_or_ambiguity": "Lengths require inches-to-feet conversion.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves each remora length, their count, shark length, and the length-percentage target."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Hypothetical coverage by combined lengths expresses the same one-dimensional comparison. Actual positions are unnecessary, although “combined length” would be more direct."
+        }
+      ]
+    },
+    {
+      "template_id": 1,
+      "verdict": "pass",
+      "independent_mathematical_relation": "42/3*10=140",
+      "derived_result": "140 minutes",
+      "source_assumptions_or_ambiguity": "The source already idealizes city coverage as advancement across its oceanfront-to-inland distance at a constant rate.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves that distance, rate, and time target."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves distance, direction, rate, and time target."
+        }
+      ]
+    },
+    {
+      "template_id": 3,
+      "verdict": "pass",
+      "independent_mathematical_relation": "50-10-5-2*5=25",
+      "derived_result": "25 students",
+      "source_assumptions_or_ambiguity": "The source’s “rest” conventionally partitions hobby categories. Overlapping real-world interests would underdetermine source and rewrites alike.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves category counts, remainder, and music twice basketball; prefer/like has no mathematical effect in that partition."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves class size, remainder, and music-to-basketball relation."
+        }
+      ]
+    },
+    {
+      "template_id": 4,
+      "verdict": "pass",
+      "independent_mathematical_relation": "20+3*20+4*20+(4*20)/2+((4*20)/2)/4=210",
+      "derived_result": "210 kernels",
+      "source_assumptions_or_ambiguity": "Equal thirty-second intervals allow equivalent rate and count multipliers; residual heat contributes one quarter of the fourth interval’s count.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves every multiplier and reference interval, while making rate-to-count reasoning more explicit."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves initial versus preceding-period bases and residual contribution."
+        }
+      ]
+    },
+    {
+      "template_id": 5,
+      "verdict": "pass",
+      "independent_mathematical_relation": "s/w=7/13; s+w=120; s=120*7/20=42",
+      "derived_result": "42 teaspoons",
+      "source_assumptions_or_ambiguity": "The unusual source sums numerical counts in different units, not physical volumes; the conventional ratio-problem reading is retained.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Explicitly identifies the same numerical-count sum and sugar-to-water ratio."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves ratio ordering and numeric counts without introducing unit conversion."
+        }
+      ]
+    },
+    {
+      "template_id": 6,
+      "verdict": "pass",
+      "independent_mathematical_relation": "10*100*(12/3)=4000",
+      "derived_result": "4000 pineapples",
+      "source_assumptions_or_ambiguity": "The source conventionally treats the field yield as recurring every three-month harvest. A separate initial harvest or varying yield is not supplied.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Per-harvest wording makes the source’s ordinary recurring-yield interpretation explicit."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves area, yield per hectare, and harvest interval."
+        }
+      ]
+    },
+    {
+      "template_id": 7,
+      "verdict": "pass",
+      "independent_mathematical_relation": "W=2*1+4*12+42*75+20*65=4500; ceil(W/2250)=2",
+      "derived_result": "2 trips",
+      "source_assumptions_or_ambiguity": "Two indivisible-item loads are feasible: thirty hay bales weigh 2250 pounds; all remaining feed also weighs 2250. Counting minimum loaded trips rather than return journeys is shared source convention.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves every count, weight, and truck capacity; removes mathematically irrelevant feeding motivations."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Truckloads preserves loaded transport trips and all weight information."
+        }
+      ]
+    },
+    {
+      "template_id": 8,
+      "verdict": "pass",
+      "independent_mathematical_relation": "16*(1/2)*(1/2)=4",
+      "derived_result": "4 blue golf balls",
+      "source_assumptions_or_ambiguity": "The second half applies to the golf-ball subset. Ability versus actual possession does not change the counted set.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves nested halves."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves nested halves and blue-golf-ball target."
+        }
+      ]
+    },
+    {
+      "template_id": 9,
+      "verdict": "pass",
+      "independent_mathematical_relation": "62-(31+8+9)=14",
+      "derived_result": "14 balls",
+      "source_assumptions_or_ambiguity": "Individual blocks and rings count as toys; containers do not under the source’s ordinary convention.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves component counts and final total; container narrative is irrelevant."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves prior counts, new purchase, and final total."
+        }
+      ]
+    },
+    {
+      "template_id": 10,
+      "verdict": "pass",
+      "independent_mathematical_relation": "16*.25+(36-16)*.20=8",
+      "derived_result": "$8",
+      "source_assumptions_or_ambiguity": "The price drop applies after sixteen minutes, without a retroactive discount.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves the threshold and both price tiers."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves call duration, threshold, and both rates."
+        }
+      ]
+    },
+    {
+      "template_id": 11,
+      "verdict": "pass",
+      "independent_mathematical_relation": "32-(3*4+7*2+8*.5)=2",
+      "derived_result": "2 ounces",
+      "source_assumptions_or_ambiguity": "All three cube sizes contribute to water used.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves all size/count/rate pairings and unused-water target."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the same pairings and remaining quantity."
+        }
+      ]
+    },
+    {
+      "template_id": 12,
+      "verdict": "pass",
+      "independent_mathematical_relation": "64-2*24=16",
+      "derived_result": "16 eggs",
+      "source_assumptions_or_ambiguity": "The source ends with singular “tray,” but explicitly states two trays and each tray’s capacity; the intended total-capacity problem is clear.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Clarifies the two-tray interpretation supported by the explicit data."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Filling both trays preserves the source’s ordinary maximum-capacity interpretation."
+        }
+      ]
+    },
+    {
+      "template_id": 13,
+      "verdict": "pass",
+      "independent_mathematical_relation": "40*2+18-40=58",
+      "derived_result": "58 plants",
+      "source_assumptions_or_ambiguity": "The received eighteen plants are additional to those already on forty ledges.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves additional plants, one-per-ledge giveaway, and retained total."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves receipt before giveaway and retained total."
+        }
+      ]
+    },
+    {
+      "template_id": 14,
+      "verdict": "pass",
+      "independent_mathematical_relation": "30-6-13=11",
+      "derived_result": "11 minutes",
+      "source_assumptions_or_ambiguity": "Thirteen minutes is an additional leg, not cumulative travel time.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves sequential legs and remaining time allowance."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Followed-by wording preserves addition of both travel legs."
+        }
+      ]
+    },
+    {
+      "template_id": 15,
+      "verdict": "pass",
+      "independent_mathematical_relation": "100*(3+4)/(8+12)=35",
+      "derived_result": "35%",
+      "source_assumptions_or_ambiguity": "The target uses both litters together, not an average of their percentages.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves both spotted counts and total counts."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves combined numerator and denominator."
+        }
+      ]
+    },
+    {
+      "template_id": 17,
+      "verdict": "pass",
+      "independent_mathematical_relation": "v_beach=2/40; v_sidewalk=2*v_beach; T=40+1/v_sidewalk=50",
+      "derived_result": "50 minutes",
+      "source_assumptions_or_ambiguity": "One mile at twice the beach speed takes a quarter of the two-mile beach time.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves distances, speed ratio, beach time, and total-time target."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves both segments and correct speed relation."
+        }
+      ]
+    },
+    {
+      "template_id": 18,
+      "verdict": "pass",
+      "independent_mathematical_relation": "4*1.5+2*4+20=34",
+      "derived_result": "$34",
+      "source_assumptions_or_ambiguity": "Bond paper is one twenty-dollar purchase; the source’s “rim” spelling is mathematically irrelevant.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Dropping the package label retains its total price."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Generic package wording preserves the single purchase and price."
+        }
+      ]
+    },
+    {
+      "template_id": 19,
+      "verdict": "revise",
+      "independent_mathematical_relation": "E=.4*60=24; A=D=18; correct=.75*24+.5*(18+18)=36",
+      "derived_result": "36 points under unit scoring",
+      "source_assumptions_or_ambiguity": "The source does not state point weights; the standard result uses one point per correct item, a common convention shared with both rewrites. “Half of the average and difficult questions” may mean half of their combined pool or half of each category. Both give eighteen correct non-easy answers, so the total is invariant.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves the collective phrasing and shared unit-scoring convention."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "revise",
+          "rationale": "Changes potentially collective half-of-average-and-difficult to half of each category. This fixes separate category-success counts beyond the collective reading. The total is unchanged, but preserve the source’s wording to avoid resolving its ambiguity."
+        }
+      ]
+    },
+    {
+      "template_id": 20,
+      "verdict": "pass",
+      "independent_mathematical_relation": "4+6+3*4=22",
+      "derived_result": "22 bananas",
+      "source_assumptions_or_ambiguity": "The source’s possession target conventionally assumes no unmentioned starting stock, eating, or transfers.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Picked-altogether equals the source’s possession quantity under that shared closed-world inventory convention."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the three days and Wednesday multiplier base."
+        }
+      ]
+    },
+    {
+      "template_id": 21,
+      "verdict": "pass",
+      "independent_mathematical_relation": "(7-(1+1+1+.5+2))/.5=3",
+      "derived_result": "3 Wednesday episodes",
+      "source_assumptions_or_ambiguity": "The seven-hour total covers the listed viewing; Wednesday episodes are each half an hour.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves all daily durations and episode length; removes motivations for viewing duration."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves all amounts and makes the listed Monday-through-Friday scope explicit."
+        }
+      ]
+    },
+    {
+      "template_id": 23,
+      "verdict": "pass",
+      "independent_mathematical_relation": "3*(2+4+12+1+2)=63",
+      "derived_result": "63 skeins",
+      "source_assumptions_or_ambiguity": "Mittens and socks are pairs. Buying required yarn presumes no unmentioned existing stock, as in the source.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves per-child garments, pair bases, skein rates, and three children."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Need versus need-to-buy gives the same requirement under the source’s no-mentioned-stock convention."
+        }
+      ]
+    },
+    {
+      "template_id": 24,
+      "verdict": "pass",
+      "independent_mathematical_relation": "(2000-1800)/250*(300/5)=48",
+      "derived_result": "48 grams",
+      "source_assumptions_or_ambiguity": "The ordinary intended target is the maximum or target-filling quantity under proportional calorie density; smaller amounts are also possible in all versions.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves calories per serving, mass per serving, and remaining allowance."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves all quantities and chip-mass target."
+        }
+      ]
+    },
+    {
+      "template_id": 25,
+      "verdict": "pass",
+      "independent_mathematical_relation": "30*.2+(30-30*.2)*.25=12",
+      "derived_result": "12 students",
+      "source_assumptions_or_ambiguity": "Twenty-five percent applies to the non-football remainder and to cheerleaders-or-band collectively. Counting this union does not require cheerleading and band to be disjoint.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves the percentage base and collective union."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the same group union and remaining-class base."
+        }
+      ]
+    },
+    {
+      "template_id": 26,
+      "verdict": "pass",
+      "independent_mathematical_relation": "7*(5+4+2)=77",
+      "derived_result": "77 sandwiches",
+      "source_assumptions_or_ambiguity": "A week has seven days and each stated daily rate applies throughout it.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves all daily rates and combined weekly target."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves daily quantities and weekly total."
+        }
+      ]
+    },
+    {
+      "template_id": 27,
+      "verdict": "revise",
+      "independent_mathematical_relation": "80*(1-.2)*5=320",
+      "derived_result": "320 incoming emails answered",
+      "source_assumptions_or_ambiguity": "The source counts incoming emails answered, not outgoing response messages; it does not specify the number of replies to each incoming email.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "revise",
+          "rationale": "Changes emails responded to into replies sent. Equating these requires one outgoing reply per answered incoming email, an assumption unnecessary for the source target. Ask how many emails he answers instead."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the count of incoming emails answered and all numerical relationships."
+        }
+      ]
+    },
+    {
+      "template_id": 29,
+      "verdict": "pass",
+      "independent_mathematical_relation": "Angela_now+4=3*14; Angela_now=38",
+      "derived_result": "38 years",
+      "source_assumptions_or_ambiguity": "The multiplier refers to Brett’s present age, not his age four years later.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves the correct present/future reference."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves Angela’s future comparison with Brett’s current age."
+        }
+      ]
+    },
+    {
+      "template_id": 30,
+      "verdict": "pass",
+      "independent_mathematical_relation": "12.48-16*.03=12.00",
+      "derived_result": "$12.00",
+      "source_assumptions_or_ambiguity": "Only the stated purchase cost is deducted; no version supplies taxes or other charges.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves money, bolt count, unit price, and remainder."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the same cost subtraction."
+        }
+      ]
+    },
+    {
+      "template_id": 31,
+      "verdict": "pass",
+      "independent_mathematical_relation": "Emma=40+16=56; (40+56)/2=48",
+      "derived_result": "48 years",
+      "source_assumptions_or_ambiguity": "Mia is explicitly younger, so sixteen is added to her age.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves gap direction and arithmetic average."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Mean and average have the same intended meaning here."
+        }
+      ]
+    },
+    {
+      "template_id": 32,
+      "verdict": "pass",
+      "independent_mathematical_relation": "350000*(1+.05+.12)-400000=9500",
+      "derived_result": "$9,500",
+      "source_assumptions_or_ambiguity": "Both additional fees use the selling price as base; they are not compounded.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves both fee bases, budget, and excess-cost target."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the same additive fees and budget excess."
+        }
+      ]
+    },
+    {
+      "template_id": 33,
+      "verdict": "pass",
+      "independent_mathematical_relation": "100-20-44=36",
+      "derived_result": "36 additional signatures",
+      "source_assumptions_or_ambiguity": "The weeks provide context, not collection rates; the target is additional combined signatures.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves both counts, goal, and timing context."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the combined additional target and numerical context."
+        }
+      ]
+    },
+    {
+      "template_id": 34,
+      "verdict": "pass",
+      "independent_mathematical_relation": "400000-.03*400000-.05*400000-250000=118000",
+      "derived_result": "$118,000",
+      "source_assumptions_or_ambiguity": "Both fees use selling price; net proceeds subtract both fees and remaining loan.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves deductions and fee bases. Mortgage adds a non-mathematical label for the house loan without changing its deduction."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves all deductions and net-money target."
+        }
+      ]
+    },
+    {
+      "template_id": 35,
+      "verdict": "pass",
+      "independent_mathematical_relation": "300-.5*300-50=100",
+      "derived_result": "$100",
+      "source_assumptions_or_ambiguity": "School support is half of total cost, not half the shortfall.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves support base, personal funds, and remaining need."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the same unmet-cost relation."
+        }
+      ]
+    },
+    {
+      "template_id": 36,
+      "verdict": "pass",
+      "independent_mathematical_relation": "3*68+2*80+6*55=694",
+      "derived_result": "$694",
+      "source_assumptions_or_ambiguity": "Both quantities and prices are per dozen, so there is no extra factor of twelve.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves all quantity/price pairings and total."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves every dozen quantity and per-dozen price."
+        }
+      ]
+    },
+    {
+      "template_id": 37,
+      "verdict": "pass",
+      "independent_mathematical_relation": "24/(2+2*2)=4",
+      "derived_result": "4 days",
+      "source_assumptions_or_ambiguity": "The source treats can-eat capacity as the daily rate for the duration estimate. Both rewrites retain that ordinary convention.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves loaf size and Josh’s rate relative to Abby."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves both daily amounts and shared-loaf duration."
+        }
+      ]
+    },
+    {
+      "template_id": 38,
+      "verdict": "pass",
+      "independent_mathematical_relation": "3*2-2*1=4",
+      "derived_result": "$4",
+      "source_assumptions_or_ambiguity": "Three loaves cost more than two bagels, so unsigned difference and directed excess coincide for this instance.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves quantities and prices; difference has the same value with these fixed amounts."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the directed bread-minus-bagels comparison."
+        }
+      ]
+    },
+    {
+      "template_id": 39,
+      "verdict": "pass",
+      "independent_mathematical_relation": "100*(80*15/5)/(8*60)=50",
+      "derived_result": "50%",
+      "source_assumptions_or_ambiguity": "Average time distributes the total over five workdays; an identical actual daily schedule is unnecessary.",
+      "variants": [
+        {
+          "variant": "paraphrase",
+          "verdict": "pass",
+          "rationale": "Preserves rooms, time per room, days, day length, and average percentage."
+        },
+        {
+          "variant": "query_first",
+          "verdict": "pass",
+          "rationale": "Preserves the same average-workday fraction and unit conversion."
+        }
+      ]
+    }
+  ],
+  "overall_findings": [
+    "Template 27 paraphrase changes incoming emails answered to outgoing replies sent, the clearest requested-quantity mismatch.",
+    "Template 19 query_first strengthens ambiguous collective half to half of each. The final total is unchanged, but the rewrite resolves source ambiguity.",
+    "Ordinary shared conventions were distinguished from new assumptions: closed-world inventory totals, recurring harvest yields, unit quiz scoring, and minimum loaded trips are examples.",
+    "Narrative compression and more explicit arithmetic relationships occur in several rewrites: feed-choice motivations are omitted in 7, viewing motivations in 21, and rate relationships become interval-count relationships in 4. These preserve mathematics but can simplify reading or relational interpretation.",
+    "The mixed-unit count total in 5 and missing point weights in 19 are source caveats, not newly introduced rewrite defects."
+  ],
+  "limitations": [
+    "One independent AI semantic review; not human certification or final-protocol approval.",
+    "Only this exact packet and these parameter values were reviewed. Changed wording requires re-review.",
+    "Mathematical equivalence does not establish equal reading difficulty, psychometric equivalence, or unchanged representational demands.",
+    "A pass does not imply that the source is fully specified under every literal or real-world reading; shared conventional assumptions and source ambiguities are recorded."
+  ],
+  "review_round": "first_pass"
+}

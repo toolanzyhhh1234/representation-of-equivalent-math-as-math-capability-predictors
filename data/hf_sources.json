@@ -1,0 +1,38 @@
+{
+  "gsm8k": {
+    "repo_id": "openai/gsm8k",
+    "config": "main",
+    "revision": "740312add88f781978c0658806c59bc2815b9866"
+  },
+  "math500": {
+    "repo_id": "HuggingFaceH4/MATH-500",
+    "config": "default",
+    "revision": "6e4ed1a2a79af7d8630a6b768ec859cb5af4d3be"
+  },
+  "arc_easy": {
+    "repo_id": "allenai/ai2_arc",
+    "config": "ARC-Easy",
+    "revision": "210d026faf9955653af8916fad021475a3f00453"
+  },
+  "paws": {
+    "repo_id": "google-research-datasets/paws",
+    "config": "labeled_final",
+    "revision": "161ece9501cf0a11f3e48bd356eaa82de46d6a09"
+  },
+  "meld": {
+    "repo_id": "uw-math-ai/MELD-dataset",
+    "revision": "0c8e42ca561413cc9834f114f8e2d187d030b79b"
+  },
+  "archive": {
+    "repo_id": "toolazyhhh123/representation-of-equivalent-math-raw",
+    "revision": "9fc0c488165f29adb6cb0386ae39d2aee3818d16"
+  },
+  "proofwriter": {
+    "repo_id": "tasksource/proofwriter",
+    "revision": "ee4d22d49b8486786cbc01c0b6f6f6266e56f3bd"
+  },
+  "folio": {
+    "repo_id": "yale-nlp/FOLIO",
+    "revision": "4c1f14bf39ca6a6de242bd8f75ef313b4b436818"
+  }
+}
