@@ -1,0 +1,209 @@
+{
+  "schema": 1,
+  "name": "logic-pilot-2026-09-22",
+  "git_commit": "90786b0202c31076bca54a25fa490353c75c5da5",
+  "files": {
+    "data/logic/pilot.json": {
+      "size": 4634039,
+      "sha256": "46f00fd61332df3bdada3758e784e4782d951c162f76b5101c97e57358aca03a"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/context_probe.npz": {
+      "size": 494781,
+      "sha256": "a18268fed843cdd56ff11108497bec1351f007dbafa1a07fb72678813ba22325"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/context_shuffled_probe.npz": {
+      "size": 490271,
+      "sha256": "8a8c1bc7f469d931dc7c35551cebb8f846409ef7a7273ae3e6d815752b060b98"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/manifest.json": {
+      "size": 615,
+      "sha256": "fe2530d3dab72bac0376919587a8458ced583651ad9fb11279ba8f58d857fc3c"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/ordered_nodes_probe.npz": {
+      "size": 1427005,
+      "sha256": "9b61bffbecf9eaae7833d7a86f8f6a01f20191ff5ddf2242cff50d1f32ff9720"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/ordered_nodes_shuffled_probe.npz": {
+      "size": 1418327,
+      "sha256": "b4db1c380e2b63ee090d2beb4122d473c26ee35d7ff447e5f45f0656483314c6"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/premise_role_probe.npz": {
+      "size": 505742,
+      "sha256": "5dfeaadfb5107c48f2171482fcb26819d6ba78673aad5adaaf2a7eb1bf864705"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/probe_results.json": {
+      "size": 20420,
+      "sha256": "3fa41cec06094dbcc6ae7a122dfd39726002ee4f96276fef37c385afd8698941"
+    },
+    "results/logic/pilot_v1/HuggingFaceTB__SmolLM2-360M/states.npz": {
+      "size": 363113566,
+      "sha256": "e1ce0d757e1da3c8a74af61b22c031fc75f54ff79f0fa4070009e41f8dca3961"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/context_probe.npz": {
+      "size": 463094,
+      "sha256": "317c3c83e4998ea6969bfa0fb7777031f88aac4c25cc38aa97dd9e612f366476"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/context_shuffled_probe.npz": {
+      "size": 455381,
+      "sha256": "e83ecf4f764774ffd233bfb0f1de317b290def660bfe42ff9ed635bdb787b95f"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/manifest.json": {
+      "size": 606,
+      "sha256": "ab766bb85b7ad49119988f0b19e42dfce2116fd7e4f9e9b254a8421811d7a70b"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/ordered_nodes_probe.npz": {
+      "size": 1335119,
+      "sha256": "c4c6578f38ae084b4f0fc6aabe5e3c5799d30b7b59a4c9bdcadc710b4ab2ece3"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/ordered_nodes_shuffled_probe.npz": {
+      "size": 1320564,
+      "sha256": "d644679a63d9ea98f64fb351dffa6a58c060ffbda6875c8b0eab7e5a410a74f8"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/premise_role_probe.npz": {
+      "size": 468122,
+      "sha256": "3c749730ff3a7a65f11e4a3b6e1ed7834f4e803ed2d4b59049c93afb0fcdc240"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/probe_results.json": {
+      "size": 17467,
+      "sha256": "fc84457e5153ce7c5c8ff9ef4baa03bf40528024bf174a81649d0066f3319653"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-0.5B/states.npz": {
+      "size": 256487877,
+      "sha256": "7c856d5d5a0483ec88d9ad5b09274a5d9663bbf1307b596f1af50ea5d3c5bd2a"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/context_probe.npz": {
+      "size": 783236,
+      "sha256": "105ace9bb9d05a043196aa87e2e1f5befe2bb7af428e01f8be9fbe448d73a192"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/context_shuffled_probe.npz": {
+      "size": 772994,
+      "sha256": "78db72e7e7150bcf2ee725deb8e7903d48666cca6c2a0801d1d22bc4ccd6d25b"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/manifest.json": {
+      "size": 608,
+      "sha256": "abf31f168eae590fc142e1e0e4aa93aaedaa53aa449fdb9928d598cc0e6ff4dd"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/ordered_nodes_probe.npz": {
+      "size": 2260018,
+      "sha256": "c6af29953f127710360ab1f20c3a8f38fb32d5e346a66245581495539015bede"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/ordered_nodes_shuffled_probe.npz": {
+      "size": 2267376,
+      "sha256": "e2db9ed8b71a86f9e3af1101e88d5695d0a8b626b9470f92a3f0237432612be2"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/premise_role_probe.npz": {
+      "size": 784542,
+      "sha256": "ee21eb98fbea3c0361a0979afe7e5d13287e102a8adf2f8f08355caac5d5338a"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/probe_results.json": {
+      "size": 18854,
+      "sha256": "c7abe46da77f79b8db867faf816a618150681c8e3b42548c10fa4fd584f00f9d"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-1.5B/states.npz": {
+      "size": 504041826,
+      "sha256": "7ae4671f3ba2830c2cdcd168e5328cf92f881184db67b5b39e2e7ae0d7dbe112"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/context_probe.npz": {
+      "size": 786621,
+      "sha256": "0513c4e40f4547695417031804c0524723f1c3531bf0520f78abfdb61bea76f4"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/context_shuffled_probe.npz": {
+      "size": 781560,
+      "sha256": "d95a4986dfd740c06a74f8b1bdcdb8a6ddebdfaa1f19ef6fecc75e0623f139f5"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/manifest.json": {
+      "size": 613,
+      "sha256": "7293b54491378898e101970743ee848d45a958f40bddc242f43417ccc2640ec2"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/ordered_nodes_probe.npz": {
+      "size": 2263935,
+      "sha256": "258c0c2588d795b60585d6bdcb099e1383158a27d2f0a235ecf6fe2246f69459"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/ordered_nodes_shuffled_probe.npz": {
+      "size": 2267951,
+      "sha256": "94c9609ae7b319108a1126a9eb2084b57911e5b1599ddde0b8d7b2bb5e5a793a"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/premise_role_probe.npz": {
+      "size": 788700,
+      "sha256": "69f5a65e604511f28d0db5569f4a5a28ee5fb093536c2b85bfdde4fa71fc7298"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/probe_results.json": {
+      "size": 18949,
+      "sha256": "54e791dc1e25776ef6b26d219382e6f9eade6575854051120f7e6dbe60fe0a9f"
+    },
+    "results/logic/pilot_v1/Qwen__Qwen2.5-Math-1.5B/states.npz": {
+      "size": 507578649,
+      "sha256": "3f5ffd07b0cbdb4165933f755f86f370f549026a90412ec9bc78e0e8632447fd"
+    },
+    "results/logic/pilot_v1/analysis.json": {
+      "size": 110849,
+      "sha256": "0d01961da3410b1b01a3985f7acccf58d0040884bfb7b1375aa53ea6c2fc9a06"
+    },
+    "results/logic/pilot_v1/environment.json": {
+      "size": 2557,
+      "sha256": "4f9a3b4cce59fa240a694b96839e0bad88cd5c174a2502472c111887dd81f1d7"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/context_probe.npz": {
+      "size": 1037830,
+      "sha256": "dff5ee7b7e70bb904c9ae7a495a9816c9cf5d7efb918bb8e6c78eee2e5287729"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/context_shuffled_probe.npz": {
+      "size": 1036787,
+      "sha256": "e7384da481c8ff6c5f8a5442d627716d7fd3a44853e31eab6feb4c180830dfa7"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/manifest.json": {
+      "size": 608,
+      "sha256": "a62f12785640937344eb3325b5b4946b2e96fb9c5059164ec7af1604a80a778a"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/ordered_nodes_probe.npz": {
+      "size": 3003757,
+      "sha256": "b7288c3b58e8c37fd36c7e869ac24ededec8277472454f2596b6fb6ce3ea90ef"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/ordered_nodes_shuffled_probe.npz": {
+      "size": 2996024,
+      "sha256": "d643576e653a7699e0d2699289c829caa39a20d00ebb13ef0a3e446a38062f13"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/premise_role_probe.npz": {
+      "size": 1060053,
+      "sha256": "0185df40f537c90e9b1726cb643e697514bb7ad2211f837d747dde9898553cfa"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/probe_results.json": {
+      "size": 17646,
+      "sha256": "79478191c5ab3f44d6dde23a761146738e5ad79515efa2c0dc27843171a5622e"
+    },
+    "results/logic/pilot_v1/microsoft__phi-1_5/states.npz": {
+      "size": 577958648,
+      "sha256": "c4f31ab0239bc32d1fd59030f18ed752d4f82d4d7f7ee2b5b3b288db016c8c5a"
+    },
+    "results/logic/pilot_v1/premise_shortcut_audit.json": {
+      "size": 1273,
+      "sha256": "4fa60bab1d2476f33148fe52445746ec9e6a367fbb052447e02f3f77a07e4078"
+    },
+    "prereg/LOGIC_PILOT.md": {
+      "size": 6562,
+      "sha256": "fedc00e7dad1eec0775d6b386c4e18a701a786bbf44c7a39417b2a25203f4350"
+    },
+    "prereg/logic_pilot.json": {
+      "size": 2275,
+      "sha256": "c84d6472906dc43f3b6a2a064575f6ab358f8382755031f9b7350de83deea8c5"
+    },
+    "results/LOGIC_PILOT.md": {
+      "size": 3276,
+      "sha256": "7533d50a052abb07c7d626faa677def068aea63c2767bc587c98d48d8cf1bc94"
+    },
+    "results/LOGIC_READOUT.md": {
+      "size": 4399,
+      "sha256": "9b5e6b21341a327a008ead7fbd4ae73c9b5da1ea65af8c8c0dc2bec3bfb5730f"
+    }
+  },
+  "archives": {
+    "data.tar.gz": {
+      "size": 2234691362,
+      "sha256": "d84f2963406cc0214dee6500b0b102469d75648b4f3e4f1687b4bcbe5810c505"
+    },
+    "code.tar.gz": {
+      "size": 1919848,
+      "sha256": "2e319a55e7c4236bd6c69792f90ce71787423fa997cea3f4a0a749e7ebd12141"
+    }
+  }
+}
