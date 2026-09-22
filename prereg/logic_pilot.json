@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "models": {
+    "HuggingFaceTB/SmolLM2-360M": "f8027fd0eaeea54caa13c31d31b9fdc459c38b49",
+    "Qwen/Qwen2.5-0.5B": "060db6499f32faf8b98477b0a26969ef7d8b9987",
+    "microsoft/phi-1_5": "77aa61eeac94fbf33d492b9f2744c98b42d5b5eb",
+    "Qwen/Qwen2.5-1.5B": "8faed761d45a263340a0528343f099c05c9a4323",
+    "Qwen/Qwen2.5-Math-1.5B": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+  },
+  "dataset_sha256": "2986f1de5274b0f24e0d544a0b7d35590ff64acc3c2c28dc646ba3504aa5c4bc",
+  "settings": {
+    "batch_size": 16,
+    "dtype": "bfloat16",
+    "pooling": "last_real_token",
+    "projection_dimensions": 128,
+    "regularization_C": 1.0,
+    "seed": 20260924
+  },
+  "environment": {
+    "packages": {
+      "torch": "2.11.0+cu128",
+      "transformers": "5.15.1",
+      "numpy": "2.5.3",
+      "datasets": "5.0.1",
+      "huggingface-hub": "1.32.0"
+    },
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "cuda": "12.8"
+  },
+  "code_sha256": {
+    "src/logic_data.py": "746f0846322e71d3f4cc3b0a1134d2ebeffdaee4b958ae38cae39541a5addf61",
+    "src/run_logic.py": "6fee860cbbe26e222beeb5440d9fb064551e8c67d9f18580151194cec7888c22",
+    "src/analyze_logic.py": "622ef38bf1f48450fe1ccb7203d102329b219293d4e5a4330480688d68aea02a",
+    "prereg/LOGIC_PILOT.md": "fedc00e7dad1eec0775d6b386c4e18a701a786bbf44c7a39417b2a25203f4350",
+    "src/h2_data.py": "23bb7d8105ba52098cb51cb3da97762067039caa13e6b8abbae9ce1de54f7615",
+    "src/run_h2.py": "0edb6b61c5b4a0b7adea4bb6aa62d713d9f57a9a88f1831be0af78ae24181fe3",
+    "src/run_h2_followup.py": "0457112ec9e5a839cfeda51d0211fca3b687501c21a48587c0c9b6c4561926b1",
+    "src/eval_gsm8k.py": "f8d673edda4e57aaadd7870712fc4d112fb43c9b3b721816bb27c474ebd6b134",
+    "src/hf_data.py": "3f1c07c628dedda8e98625a3b3c45e4dcef13bcd756e46e39122f0dd7376454a",
+    "src/config.py": "2c34d03c8ee30b86ce170b2f6ba06fe6e9a476cbdc02e44cc441561108ae3f04",
+    "data/hf_sources.json": "6c44ebd104b0d1f417e92dbf7c05df78542ea78a038d42eb8d4a9e2ab89df018",
+    "pyproject.toml": "d7b37987a65dbcea3aa0ca51e3ab108a9ab5da6362236cfce4597440e5682dc7",
+    "uv.lock": "c063574dc42bd4f2eee4f3c625116006801774809f6740a4a51fdb1c1cf2d3c6"
+  },
+  "sha256": "2da216b0990aa692ff6526ef2e68c83ad35b92f0b509536d64883c457b8eafbd",
+  "created_utc": "2026-09-22T09:46:03.898668+00:00"
+}

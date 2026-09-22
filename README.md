@@ -20,6 +20,8 @@ equivalent reformulations?
 | [`results/PHASE4_H2_AUDIT.md`](results/PHASE4_H2_AUDIT.md) | First-pilot sampling/termination audit and independent semantic-review corrections |
 | [`results/PHASE4_H2_FOLLOWUP.md`](results/PHASE4_H2_FOLLOWUP.md) | Blind-reviewed follow-up: 36 problems, 5 models, 21,600 fresh responses; strict arm primary, holdouts separate |
 | [`results/H2_FOLLOWUP_READOUT.md`](results/H2_FOLLOWUP_READOUT.md) | Interpretation: no clear positive H2 signal; accuracy gain without a clear matched-size invariance gain |
+| [`results/LOGIC_PILOT.md`](results/LOGIC_PILOT.md) | Solver-checked logical-consequence pilot: directed queries, premise roles, layerwise probes and controls |
+| [`results/LOGIC_READOUT.md`](results/LOGIC_READOUT.md) | Interpretation: limited directional transfer and a discovered premise-role syntax shortcut |
 | [`RELATED_WORK.md`](RELATED_WORK.md) | prior work, mapped to the design decision each one justifies or threatens |
 
 ### Headline finding

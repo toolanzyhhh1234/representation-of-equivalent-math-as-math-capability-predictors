@@ -15,7 +15,9 @@ results/raw_outputs
 # Downloaded datasets, archive, and local verification reports.
 data/hf/
 data/h2/
+data/logic/
 results/h2/
+results/logic/
 results/setup/
 .env
 .env.*

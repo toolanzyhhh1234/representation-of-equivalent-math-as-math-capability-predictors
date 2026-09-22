@@ -43,6 +43,17 @@ plus the pinned code here. Activations also cache locally to `results/raw/`
 
 ## Next steps (agreed order)
 
+**2026-09-22 handoff update:** H2 now has completed pilot/follow-up runs and pinned HF
+snapshots; see `ARCHIVES.md`, `H2_RUNNING.md`, and `results/H2_FOLLOWUP_READOUT.md`.
+The user then requested the logical-consequence investigation. That first pilot is
+in `LOGIC_RUNNING.md` and `results/LOGIC_READOUT.md`: limited directional transfer,
+and a post-hoc syntax rule perfectly predicts the auxiliary premise-role labels.
+Do not present those role scores as semantic indispensability evidence. The next
+logic version needs counterfactual remote-proof changes and matched surface features.
+All frozen experiment files are hash checked: create new versions rather than edit
+the scientific code/data and silently reuse old caches. Earlier result files remain
+historical; the list below records the pre-H2 roadmap, not unfinished completed work.
+
 1. **H2 invariance arm** — rewrite-invariance DV (PLAN.md §5, GSM-Symbolic-style);
    two-sided advance predictions already registered in REPORT §4.8–4.9.
 2. H3 causal arm — ablate the equivalence subspace (~10 dims expected; PLAN §7).
