@@ -71,6 +71,9 @@ boundary.
 
 ## Running it
 
+Completed experiments are preserved on HF with pinned revisions, code snapshots and
+per-file checksums; see [ARCHIVES.md](ARCHIVES.md) for retrieval and restore commands.
+
 Start with [SETUP.md](SETUP.md) for the locked Python/CUDA environment, Hugging Face
 login, pinned data downloads, and verification commands. The proposed extension to
 logical premises and consequences is in [LOGIC_EXTENSION.md](LOGIC_EXTENSION.md).
